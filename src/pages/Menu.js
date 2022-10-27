@@ -1,35 +1,17 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import * as request from '~/utils/request';
+import React from 'react';
 
 const Menu = () => {
-    const [categories, setCategories] = useState([]);
-    const [error, setError] = useState('');
-    useEffect(() => {
-        const getAllCategories = async () => {
-            try {
-                const cates = await request.get('/categories');
-                console.log(cates)
-                setCategories(cates.data)
-            } catch (error) {
-                setError(error.message)
-            }
-        }
-        getAllCategories();
-    }, [])
+    // const [categories, setCategories] = useState([]);
+    // const [error, setError] = useState('');
+    // useEffect(() => {
+
+
+    // }, [])
     return (
         <div className='Menu'>
             <h1>Menu</h1>
-            {error && <p className='red'>{error}</p>}
-            <ul>
-                {
-                    categories.map((cate, index) =>
-                        <li key={index}>{cate.name}</li>
-                    )
-                }
-            </ul>
         </div>
     )
 }
 
-export default Menu
+export default Menu;

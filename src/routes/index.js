@@ -1,11 +1,24 @@
 import Home from '~/pages/Home'
 import Menu from '~/pages/Menu'
 import ProductDetail from '~/pages/ProductDetail'
+import Login from '~/pages/Login';
+import Register from '~/pages/Register';
+import { Fragment } from 'react';
 
 export const publicRoute = [
     {
-        path: '/',
+        path: '',
         component: Home
+    },
+    {
+        path: 'auth',
+        component: Login,
+        layout: Fragment
+    },
+    {
+        path: 'register',
+        component: Register,
+        layout: Fragment
     },
     {
         path: 'menu',
@@ -15,4 +28,10 @@ export const publicRoute = [
         path: 'products/:id',
         component: ProductDetail
     }
-]
+];
+export const privateRoute = [
+    {
+        path: 'admin/dashboard',
+        component: '',
+    }
+];
