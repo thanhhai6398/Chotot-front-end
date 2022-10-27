@@ -1,8 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { publicRoute } from '~/routes';
+import DefaultLayout from '~/layouts/User/DefaultLayout';
 import './App.css';
-import DefaultLayout from './components/Layout/User/DefaultLayout';
+
 
 function App() {
   return (

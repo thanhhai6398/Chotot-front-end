@@ -1,9 +1,9 @@
+import { Fragment } from 'react';
 import Home from '~/pages/Home'
 import Menu from '~/pages/Menu'
 import ProductDetail from '~/pages/ProductDetail'
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
-import { Fragment } from 'react';
 
 export const publicRoute = [
     {
