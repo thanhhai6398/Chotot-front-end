@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
 import Home from '~/pages/Home'
-import Menu from '~/pages/Menu'
 import ProductDetail from '~/pages/ProductDetail'
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
+import BlankLayout from '~/layouts/User/BlankLayout';
+import AddPost from '~/pages/AddPost';
 
 export const publicRoute = [
     {
@@ -13,16 +13,16 @@ export const publicRoute = [
     {
         path: 'auth',
         component: Login,
-        layout: Fragment
+        layout: BlankLayout
     },
     {
         path: 'register',
         component: Register,
-        layout: Fragment
+        layout: BlankLayout
     },
     {
-        path: 'menu',
-        component: Menu
+        path: 'addPost',
+        component: AddPost
     },
     {
         path: 'products/:id',
@@ -33,5 +33,5 @@ export const privateRoute = [
     {
         path: 'admin/dashboard',
         component: '',
-    }
+    },
 ];
