@@ -20,16 +20,40 @@ const AddPost = () => {
             default: return <GeneralForm></GeneralForm>
         }
     }
+    const initValue = {
+        title: '',
+        price: '',
+        description: '',
+        address: '',
+
+        images: [],
+
+        branchName: '',
+        year: '',
+        warranty: '',
+        category: '',
+        postedBy: ''
+    }
+    const [post, setPost] = useState(initValue);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+    const onChange = (e) => {
+        setPost(prevPost => {
+            return { ...prevPost, [e.target.name]: e.target.value };
+        })
+    }
     return (
-        <section className='max-w-screen-lg mx-auto bg-white p-8 flex justify-center flex-col'>
-            <div className=' mx-auto rounded-lg w-3/4 px-8 py-8 text-center'>
+        <section className='max-w-screen-lg min-h-screen mx-auto bg-white p-8 flex flex-col'>
+            <div className='mx-auto rounded-lg w-3/4 px-8 py-4 text-center'>
                 {handleForm()}
             </div>
-            <div className='my-8 text-gray-400 text-bold'>
-                {page > 0 && <button onClick={handlePrev} className='px-4 py-2 border rounded-l hover:text-yellow-400'><FaArrowLeft /></button>}
-                <button onClick={handleNext} className='px-4 py-2  border rounded-r hover:text-yellow-400'><FaArrowRight /></button>
+            <div className='my-8 text-white text-bold'>
+                {page > 0 && <button onClick={handlePrev} className='px-4 py-2 border rounded-l bg-red-400 hover:opacity-80'><FaArrowLeft /></button>}
+                {page < list.length - 1 && <button onClick={handleNext} className='px-4 py-2  border rounded-r bg-green-400 hover:opacity-80'><FaArrowRight /></button>}
             </div>
-        </section>
+            {page === list.length - 1 && <button onClick={handleSubmit} className='px-4 py-2 text-white text-bold text-lg border rounded-r bg-primary hover:opacity-80'>Lưu</button>}
+        </section >
     )
 }
 
