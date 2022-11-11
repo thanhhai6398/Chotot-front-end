@@ -6,7 +6,7 @@ const Login = () => {
     const navigate = useNavigate();
     return (
         <section className="flex justify-between rounded-2xl bg-white max-w-3xl shadow-2xl py-8">
-            <div className='sm:w-1/20 px-16'>
+            <div className='sm:w-1/20 px-16 text-center'>
                 <h2 className='text-2xl font-bold my-4'>Đăng nhập</h2>
                 <p className='text-sm mb-4'>Chưa có tài khoản? <span onClick={() => navigate('/register')} className='cursor-pointer font-bold underline underline-offset-1 text-lg hover:text-primary'>Đăng ký</span></p>
                 <form className='text-sm'>
