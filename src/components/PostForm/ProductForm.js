@@ -13,7 +13,6 @@ const ProductForm = () => {
     }
   })
   const handleChange = (e) => {
-    console.log(e.target)
     setInput({ ...input, [e.target.name]: e.target.value })
     setPost({ ...post, ...input })
   }

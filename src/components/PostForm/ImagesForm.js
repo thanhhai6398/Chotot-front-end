@@ -11,11 +11,7 @@ const ImagesForm = () => {
 
   const handleChange = async (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
-      const imgURL = URL.createObjectURL(e.target.files[i])
-      const newImage = {
-        file: e.target.files[i],
-        alt: imgURL,
-      }
+      const newImage = e.target.files[i]
       setImages((prevState) => [...prevState, newImage])
     }
   }
@@ -48,10 +44,11 @@ const ImagesForm = () => {
       </div>
       <ul className=" min-h-300 grid grid-cols-2 gap-2 selection:p-5 mt-4 p-4  border-2 border-dashed border-primary">
         {images.map((image, index) => {
+          const imgURL = URL.createObjectURL(image)
           return (
             <li key={index}>
               <img
-                src={image.alt}
+                src={imgURL}
                 alt={index}
                 className="w-full object-contain object-center"
               />

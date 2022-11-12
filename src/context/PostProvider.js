@@ -16,7 +16,7 @@ const PostProvider = ({ children }) => {
     year: '',
     warranty: '',
     version: '',
-    postedBy: '',
+    postedBy: '633a9bd7169e0f178bfb859a',
   }
   const [post, setPost] = useState(initValue)
   return (

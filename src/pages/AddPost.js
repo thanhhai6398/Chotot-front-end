@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { PostContext } from '~/context/PostProvider'
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import { ImagesForm, GeneralForm, ProductForm } from '~/components/PostForm'
 import { uploadImages } from '~/apiServices/uploadImagesService'
+import { httpAddPost } from '~/apiServices/postService'
 
 const AddPost = () => {
   const list = ['GeneralForm', 'ProductForm', 'ImagesForm']
   const [page, setPage] = useState(0)
+  const [isPending, setPending] = useState(false)
+  const navigate = useNavigate()
   const handlePrev = () => {
     setPage((page) => (page === 0 ? 0 : page - 1))
   }
@@ -29,17 +33,26 @@ const AddPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (post.images.length > 0) {
-      const imageURLs = await uploadImages(post.category, post.images)
-      setPost({ ...post, imageURLs })
-      //peding
+      setPending(true)
+      uploadImages(post.category, post.images)
+        .then(async (imagesURLs) => {
+          const postToAdd = { ...post, images: imagesURLs }
+          const response = await httpAddPost(postToAdd)
+          console.log(response)
+          setPending(false)
+          navigate(`/products/${response.data['_id']}`)
+          // if (response.ok) {
+          //   setPending(false)
+          //   navigate(`/products/${response.data['_id']}`)
+          // } else alert('Failed')
+        })
+        .catch((err) => console.log(err))
     }
   }
   return (
     <section className="max-w-screen-lg min-h-screen mx-auto bg-white p-8 flex flex-col text-center">
-      <div className="mx-auto rounded-lg w-3/4 px-8 py-4">
-        {handleForm()}
-        {console.log(post)}
-      </div>
+      {isPending && <p>Loading.....</p>}
+      <div className="mx-auto rounded-lg w-3/4 px-8 py-4">{handleForm()}</div>
       <div className="my-8 text-white text-bold">
         {page > 0 && (
           <button
@@ -71,4 +84,4 @@ const AddPost = () => {
   )
 }
 
-export default AddPost;
+export default AddPost
