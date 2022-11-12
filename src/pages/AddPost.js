@@ -1,9 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { PostContext } from '~/context/PostProvider';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
-import { ImagesForm, GeneralForm, ProductForm } from '~/components/PostForm'
-import postcss from 'postcss';
-
+import { ImagesForm, GeneralForm, ProductForm } from '~/components/PostForm';
+import { uploadImages } from '~/apiServices/uploadImagesService';
 
 const AddPost = () => {
     const list = ['GeneralForm', 'ProductForm', 'ImagesForm']
@@ -22,41 +21,27 @@ const AddPost = () => {
             default: return <GeneralForm></GeneralForm>
         }
     }
-    // const initValue = {
-    //     title: '',
-    //     price: '',
-    //     description: '',
-    //     address: '',
-
-    //     images: [],
-
-    //     branchName: '',
-    //     year: '',
-    //     warranty: '',
-    //     category: '',
-    //     postedBy: ''
-    // }
-    // const [post, setPost] = useState(initValue);
-    const [post] = useContext(PostContext);
-    const handleSubmit = (e) => {
+    const { post, setPost } = useContext(PostContext);
+    const { isPending, setPending } = useContext(PostContext);
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (post.images.length > 0) {
-            alert('success')
-            console.log(post);
+            const images = await uploadImages('test', post.images);
+            setPost({ ...post, images });
+            setPending(false)
         }
-        console.log(post);
 
     }
     return (
         <section className='max-w-screen-lg min-h-screen mx-auto bg-white p-8 flex flex-col text-center'>
             <div className='mx-auto rounded-lg w-3/4 px-8 py-4'>
-                {console.log(post)}
                 {handleForm()}
             </div>
             <div className='my-8 text-white text-bold'>
                 {page > 0 && <button onClick={handlePrev} className='px-4 py-2 border rounded-l bg-red-400 hover:opacity-80'><FaArrowLeft /></button>}
                 {page < list.length - 1 && <button onClick={handleNext} className='px-4 py-2  border rounded-r bg-green-400 hover:opacity-80'><FaArrowRight /></button>}
             </div>
+            {isPending && <p>Loading.....</p>}
             {page === list.length - 1 && <button onClick={handleSubmit} className='px-4 py-2 text-white text-bold text-lg border rounded-r bg-primary hover:opacity-80'>Lưu</button>}
         </section >
     )

@@ -1,23 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import {
-    ref,
-    uploadBytes,
-    getDownloadURL,
-    listAll,
-    list,
-} from "firebase/storage";
-import { storage } from '~/firebase';
 import { PostContext } from '~/context/PostProvider';
-import { async } from '@firebase/util';
 
-const ImagesForm = ({ category }) => {
-    /*ref*/
-    const imagesListRef = ref(storage, `${category}/`);
+const ImagesForm = () => {
+
     const [images, setImages] = useState([]);
-    const [urls, setUrls] = useState([]);
+
     const [showInput, setShowInput] = useState(true);
     //useContext
-    const [post, setPost] = useContext(PostContext);
+    const { setPost } = useContext(PostContext);
     const handleChange = async (e) => {
         for (let i = 0; i < e.target.files.length; i++) {
             const newImage = e.target.files[i];
@@ -34,7 +25,7 @@ const ImagesForm = ({ category }) => {
             });
         }
         const checkLength = () => {
-            if (images.length > 1) {
+            if (images.length > 0) {
                 updatePost();
             }
             if (images.length >= 4) {

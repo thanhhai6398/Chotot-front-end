@@ -18,8 +18,9 @@ const PostProvider = ({ children }) => {
         postedBy: ''
     }
     const [post, setPost] = useState(initValue);
+    const [isPending, setPending] = useState(true);
     return (
-        <PostContext.Provider value={[post, setPost]}>
+        <PostContext.Provider value={{ post, setPost, isPending, setPending }}>
             {children}
         </PostContext.Provider>
     )
