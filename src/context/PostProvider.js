@@ -1,29 +1,29 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react'
 
-export const PostContext = createContext({});
+export const PostContext = createContext({})
 
 const PostProvider = ({ children }) => {
-    const initValue = {
-        title: '',
-        price: '',
-        description: '',
-        address: '',
+  const initValue = {
+    title: '',
+    category: '',
+    price: '',
+    description: '',
+    address: '',
 
-        images: [],
+    images: [],
 
-        branchName: '',
-        year: '',
-        warranty: '',
-        category: '',
-        postedBy: ''
-    }
-    const [post, setPost] = useState(initValue);
-    const [isPending, setPending] = useState(true);
-    return (
-        <PostContext.Provider value={{ post, setPost, isPending, setPending }}>
-            {children}
-        </PostContext.Provider>
-    )
+    branchName: '',
+    year: '',
+    warranty: '',
+    version: '',
+    postedBy: '',
+  }
+  const [post, setPost] = useState(initValue)
+  return (
+    <PostContext.Provider value={{ post, setPost }}>
+      {children}
+    </PostContext.Provider>
+  )
 }
 
-export default PostProvider;
+export default PostProvider
