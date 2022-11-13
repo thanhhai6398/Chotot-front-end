@@ -1,9 +1,10 @@
-import React, { useContext, useLayoutEffect, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import { httpGetAllCategories } from '~/apiServices/categoryServices'
 import { PostContext } from '~/context/PostProvider'
 
 const GeneralForm = () => {
-  const [cates, setCates] = useState()
+  const [cates, setCates] = useState([])
   const { post, setPost } = useContext(PostContext)
   const [input, setInput] = useState(() => {
     const { title, category, price, description, address } = post
@@ -11,7 +12,6 @@ const GeneralForm = () => {
   })
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })
-    setPost({ ...post, ...input })
   }
   useLayoutEffect(() => {
     const getAllCategories = async () => {
@@ -20,6 +20,9 @@ const GeneralForm = () => {
     }
     getAllCategories()
   }, [])
+  useEffect(() => {
+    setPost({ ...post, ...input })
+  }, [input])
   const handleSelectCate = () => {
     return cates.map((category) => {
       return (
@@ -41,9 +44,7 @@ const GeneralForm = () => {
           defaultValue="default"
           required
         >
-          <option selected value="default">
-            Chọn loại tin
-          </option>
+          <option value="default">Chọn loại tin</option>
           {cates && handleSelectCate()}
         </select>
         <input

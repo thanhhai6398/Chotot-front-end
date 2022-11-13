@@ -10,10 +10,10 @@ export const httpGetPostById = async (id) => {
 }
 export const httpAddPost = async (payload) => {
   try {
-    const res = request.post('/posts/upload', payload)
+    const submitData = JSON.stringify(payload)
+    const res = request.post('/posts/upload', JSON.parse(submitData))
     return res
   } catch (error) {
     console.log(error.message)
-    return { ok: false }
   }
 }

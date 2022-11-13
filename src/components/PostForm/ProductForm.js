@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useContext, useEffect } from 'react'
 import { PostContext } from '~/context/PostProvider'
 
 const ProductForm = () => {
@@ -14,8 +15,10 @@ const ProductForm = () => {
   })
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value })
-    setPost({ ...post, ...input })
   }
+  useEffect(() => {
+    setPost({ ...post, ...input })
+  }, [input])
   return (
     <div>
       <h2 className="font-medium text-2xl">Thông tin chi tiết sản phẩm</h2>

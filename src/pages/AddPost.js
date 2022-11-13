@@ -33,14 +33,16 @@ const AddPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (post.images.length > 0) {
+      console.log(post)
       setPending(true)
       uploadImages(post.category, post.images)
         .then(async (imagesURLs) => {
-          const postToAdd = { ...post, images: imagesURLs }
-          const response = await httpAddPost(postToAdd)
+          // const postToAdd = { ...post, images: imagesURLs }
+          // console.log(postToAdd)
+          const response = await httpAddPost({ ...post, images: imagesURLs })
           console.log(response)
           setPending(false)
-          navigate(`/products/${response.data['_id']}`)
+          //navigate(`/products/${response.data['_id']}`)
           // if (response.ok) {
           //   setPending(false)
           //   navigate(`/products/${response.data['_id']}`)
