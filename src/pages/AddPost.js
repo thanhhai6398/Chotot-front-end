@@ -5,6 +5,7 @@ import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import { ImagesForm, GeneralForm, ProductForm } from '~/components/PostForm'
 import { uploadImages } from '~/apiServices/uploadImagesService'
 import { httpAddPost } from '~/apiServices/postService'
+import ImageGallery from '~/components/Product/ImageGallery'
 
 const AddPost = () => {
   const list = ['GeneralForm', 'ProductForm', 'ImagesForm']
@@ -33,22 +34,30 @@ const AddPost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (post.images.length > 0) {
-      console.log(post)
-      setPending(true)
-      uploadImages(post.category, post.images)
-        .then(async (imagesURLs) => {
-          // const postToAdd = { ...post, images: imagesURLs }
-          // console.log(postToAdd)
-          const response = await httpAddPost({ ...post, images: imagesURLs })
-          console.log(response)
-          setPending(false)
-          //navigate(`/products/${response.data['_id']}`)
-          // if (response.ok) {
-          //   setPending(false)
-          //   navigate(`/products/${response.data['_id']}`)
-          // } else alert('Failed')
-        })
-        .catch((err) => console.log(err))
+      try {
+        setPending(true)
+        const imagesURLs = await uploadImages(post.category, post.images)
+        const response = await httpAddPost({ ...post, images: imagesURLs })
+        console.log(response)
+        setPending(false)
+      } catch (error) {
+        console.log(error.message)
+      }
+
+      // uploadImages(post.category, post.images)
+      //   .then(async (imagesURLs) => {
+      //     const postToAdd = { ...post, images: imagesURLs }
+      //     console.log(postToAdd)
+      //     const response = await httpAddPost(postToAdd)
+      //     console.log(response)
+      //     setPending(false)
+      //     //navigate(`/products/${response.data['_id']}`)
+      //     // if (response.ok) {
+      //     //   setPending(false)
+      //     //   navigate(`/products/${response.data['_id']}`)
+      //     // } else alert('Failed')
+      //   })
+      //   .catch((err) => console.log(err))
     }
   }
   return (
