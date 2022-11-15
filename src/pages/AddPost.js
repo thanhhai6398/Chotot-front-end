@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react';
+import { PostContext } from '~/context/PostProvider';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import { ImagesForm, GeneralForm, ProductForm } from '~/components/PostForm'
+import postcss from 'postcss';
 
 
 const AddPost = () => {
@@ -20,32 +22,35 @@ const AddPost = () => {
             default: return <GeneralForm></GeneralForm>
         }
     }
-    const initValue = {
-        title: '',
-        price: '',
-        description: '',
-        address: '',
+    // const initValue = {
+    //     title: '',
+    //     price: '',
+    //     description: '',
+    //     address: '',
 
-        images: [],
+    //     images: [],
 
-        branchName: '',
-        year: '',
-        warranty: '',
-        category: '',
-        postedBy: ''
-    }
-    const [post, setPost] = useState(initValue);
+    //     branchName: '',
+    //     year: '',
+    //     warranty: '',
+    //     category: '',
+    //     postedBy: ''
+    // }
+    // const [post, setPost] = useState(initValue);
+    const [post] = useContext(PostContext);
     const handleSubmit = (e) => {
         e.preventDefault();
-    }
-    const onChange = (e) => {
-        setPost(prevPost => {
-            return { ...prevPost, [e.target.name]: e.target.value };
-        })
+        if (post.images.length > 0) {
+            alert('success')
+            console.log(post);
+        }
+        console.log(post);
+
     }
     return (
-        <section className='max-w-screen-lg min-h-screen mx-auto bg-white p-8 flex flex-col'>
-            <div className='mx-auto rounded-lg w-3/4 px-8 py-4 text-center'>
+        <section className='max-w-screen-lg min-h-screen mx-auto bg-white p-8 flex flex-col text-center'>
+            <div className='mx-auto rounded-lg w-3/4 px-8 py-4'>
+                {console.log(post)}
                 {handleForm()}
             </div>
             <div className='my-8 text-white text-bold'>

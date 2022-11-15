@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 const Register = () => {
     const navigate = useNavigate();
     return (
-        <section className='bg-white shadow-2xl rounded-2xl max-w-3xl px-16 py-8'>
+        <section className='bg-white shadow-2xl rounded-2xl max-w-3xl px-16 py-8 text-center'>
             <h2 className='text-2xl font-bold mb-4'>Đăng ký</h2>
             <p className='text-sm mb-4'>Đã có tài khoản? <span onClick={() => navigate('/auth')} className='font-bold underline underline-offset-1 text-lg hover:text-primary cursor-pointer'>Đăng nhập</span></p>
             <form className='text-sm'>
