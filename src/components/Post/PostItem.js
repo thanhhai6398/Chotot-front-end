@@ -1,12 +1,12 @@
 import React from 'react';
-const ProductItem = (props) => {
-    const { product } = props;
+const PostItem = (props) => {
+    const { post } = props;
     
     return (
         <div className="bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl hover:scale-105 p-4 rounded-lg relative">
-            <a href={"/products/" + product.id}>    
+            <a href={"/posts/" + post.id}>    
                 <div>
-                    <img className="w-64 mx-auto transform transition duration-300 hover:scale-105" src={product.image} alt=""/>
+                    <img className="w-64 mx-auto transform transition duration-300 hover:scale-105" src={post.image} alt=""/>
                     <div >
                         <button className="text-red-600">
                             <svg class="text-red-400 w-6 h-auto fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -18,13 +18,13 @@ const ProductItem = (props) => {
                 </div>
                 <div className="flex flex-col items-center my-3 space-y-2">
                     <div className="text-gray-900 poppins text-lg">
-                        {product.title}
+                        {post.title}
                     </div>
                     <div className="text-gray-900 poppins text-2xl font-bold">
-                        ${product.price}
+                        ${post.price}
                     </div>
                     <div className="text-gray-900 poppins text-xl">
-                        {product.address}
+                        {post.address}
                     </div>
                 </div>
             </a>
@@ -32,4 +32,4 @@ const ProductItem = (props) => {
     )
 }
 
-export default ProductItem
+export default PostItem
