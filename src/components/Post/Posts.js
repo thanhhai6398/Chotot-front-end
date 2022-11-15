@@ -1,6 +1,6 @@
-import ProductItem from "./ProductItem";
-function Products(props) {
-    const products = [
+import PostItem from "./PostItem";
+function Posts(props) {
+    const posts = [
         {
             id: 1,
             title: 'iPhone 13 Pro Max 256G VN - Zin chuẩn',
@@ -38,8 +38,8 @@ function Products(props) {
 
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {
-                        products.map((product, index) => (
-                            <ProductItem product={product} key={index}></ProductItem>
+                        posts.map((post, index) => (
+                            <PostItem post={post} key={index}></PostItem>
                         ))
                     }
                 </div>
@@ -47,4 +47,4 @@ function Products(props) {
         </div>
     )
 }
-export default Products
+export default Posts
