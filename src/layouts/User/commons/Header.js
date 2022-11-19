@@ -50,7 +50,7 @@ const Header = () => {
       </div>
       <div className="flex flex-row justify-between mt-2">
         <input
-          className="border-white rounded px-5 w-80 h-10 flex-1"
+          className="border-white rounded px-5 w-80 h-10 flex-1 boder-none outline-none focus:outline-none"
           placeholder=" Tìm kiếm sản phẩm"
         ></input>
         <button className="bg-orange-500 rounded px-5 ml-1 w-14 h-10 text-center align-middle">
