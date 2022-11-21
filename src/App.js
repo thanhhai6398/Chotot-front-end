@@ -2,13 +2,14 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { publicRoute } from '~/routes';
 import DefaultLayout from '~/layouts/User/DefaultLayout';
+import {UserInfoForm} from './components/User/index';
 import './App.css';
 
 
 function App() {
   return (
     <div className='App'>
-      <Routes>
+      {/* <Routes>
         {
           publicRoute.map((route, index) => {
             const Page = route.component;
@@ -21,7 +22,8 @@ function App() {
               } />
           })
         }
-      </Routes>
+      </Routes> */}
+      <UserInfoForm/>
     </div>
 
   );
