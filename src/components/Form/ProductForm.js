@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from 'react'
-import { PostContext } from '~/context/PostProvider'
+import { PostContext } from '~/contexts/PostProvider'
 
 const ProductForm = () => {
   const { post, setPost } = useContext(PostContext)
