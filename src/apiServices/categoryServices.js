@@ -1,6 +1,6 @@
 import * as request from '~/utils/request';
 
-export const getAllCategories = async () => {
+export const httpGetAllCategories = async () => {
     try {
         const res = await request.get('/categories');
         return res.data;
