@@ -53,7 +53,7 @@ function ProductDetail() {
       console.log(response);
     };
     getPostById();
-  }, [ ]);
+  }, []);
   return (
     <div className='bg-white'>
       {/* {product.filter(item => item.id === id).map(product => ( */}
@@ -66,7 +66,7 @@ function ProductDetail() {
             <li>
               <div className='flex items-center'>
                 <a className='mr-2 text-sm font-medium text-gray-900'>
-                  {/* {post.category.name} */}
+                  {product.category}
                 </a>
                 <svg
                   width={16}
@@ -84,7 +84,7 @@ function ProductDetail() {
             <li>
               <div className='flex items-center'>
                 <a className='mr-2 text-sm font-medium text-gray-900'>
-                  {post.branchName}
+                  {product.branchName}
                 </a>
                 <svg
                   width={16}
@@ -100,20 +100,19 @@ function ProductDetail() {
               </div>
             </li>
             <li className='text-sm'>
-              {post.title}
-              {/* <a
-                href={post.href}
-                aria-current="page"
-                className="font-medium text-gray-500 hover:text-gray-600"
+              <a
+                href={product.href}
+                aria-current='page'
+                className='font-medium text-gray-500 hover:text-gray-600'
               >
                 {product.title}
-              </a> */}
+              </a>
             </li>
           </ol>
         </nav>
 
         {/* Image gallery */}
-        <ImageGallery images={post.images} />
+        <ImageGallery images={product.images} />
         {/*
                 <div className="mx-auto mt-6 max-w-xl sm:px-6">
                     <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
@@ -129,7 +128,7 @@ function ProductDetail() {
         <div className='mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24'>
           <div className='lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8'>
             <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>
-              {post.title}
+              {product.title}
             </h1>
           </div>
 
@@ -144,7 +143,7 @@ function ProductDetail() {
             <div className='mt-10'>
               <div className='flex items-center justify-between'>
                 <h3 className='text-lg font-medium text-gray-900'>
-                  {/* {postedBy.username} */}
+                  {postedBy.username}
                 </h3>
                 <button
                   href='#'
@@ -161,7 +160,7 @@ function ProductDetail() {
             <div className='mt-10'>
               <div className='flex items-center justify-between'>
                 <p className=' text-red-600 text-3xl tracking-tight text-gray-900'>
-                  {post.price}
+                  {product.price}
                 </p>
                 <a
                   href='/save'
@@ -194,13 +193,13 @@ function ProductDetail() {
                   Ngày đăng: {product.datePosted}
                 </p>
                 <p className='text-base leading-4 mt-4 text-gray-600'>
-                  Hãng SX: {post.branchName}
+                  Hãng SX: {product.branchName}
                 </p>
                 <p className='text-base leading-4 mt-4 text-gray-600'>
-                  Năm SX: {post.year}
+                  Năm SX: {product.year}
                 </p>
                 <p className='text-base leading-4 mt-4 text-gray-600'>
-                  Bảo hành: {post.warranty}
+                  Bảo hành: {product.warranty}
                 </p>
               </div>
             </div>
@@ -209,7 +208,7 @@ function ProductDetail() {
               <h2 className='text-lg font-medium text-gray-900'>Khu vực</h2>
 
               <div className='mt-4 space-y-6'>
-                <p className='text-lg text-gray-600'>{post.address}</p>
+                <p className='text-lg text-gray-600'>{product.address}</p>
               </div>
             </div>
           </div>

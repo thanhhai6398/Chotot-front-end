@@ -1,10 +1,12 @@
 import Home from '~/pages/Home';
-import ProductDetail from '~/pages/ProductDetail';
+import PostDetail from '~/pages/PostDetail';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import BlankLayout from '~/layouts/User/BlankLayout';
 import AddPost from '~/pages/AddPost';
-import SearchByImage from '~/pages/SearchByImage';
+import Following from '~/pages/Following';
+import PostsSaved from '~/pages/PostsSaved';
+import ManagePosts from '~/pages/ManagePosts';
 
 export const publicRoute = [
   {
@@ -26,12 +28,20 @@ export const publicRoute = [
     component: AddPost,
   },
   {
-    path: 'products/:id',
-    component: ProductDetail,
+    path: 'posts/:id',
+    component: PostDetail,
   },
   {
-    path: 'search/img',
-    component: SearchByImage,
+    path: 'following',
+    component: Following,
+  },
+  {
+    path: 'postsSaved',
+    component: PostsSaved,
+  },
+  {
+    path: 'managePosts',
+    component: ManagePosts,
   },
 ];
 export const privateRoute = [
