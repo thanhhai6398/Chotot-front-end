@@ -5,7 +5,7 @@ export const httpGetPostById = async (id) => {
     const res = request.get(`/posts/${id}`);
     return res.data;
   } catch (error) {
-    console.log(error.message);
+    console.log(error.data);
   }
 };
 export const httpAddPost = async (payload) => {
@@ -13,8 +13,8 @@ export const httpAddPost = async (payload) => {
     // console.log('PAYLOAD: ', payload);
     // console.log('JSON: ', JSON.stringify(payload));
     const res = request.post('/posts/upload', payload);
-    return res;
+    return res.data;
   } catch (error) {
-    console.log(error.message);
+    console.log(error.data);
   }
 };

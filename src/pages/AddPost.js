@@ -42,27 +42,11 @@ const AddPost = () => {
           const response = await httpAddPost(newPost);
           console.log(response);
           setPending(false);
-          navigate(`/products/${response.data['_id']}`);
+          navigate(`/products/${response['_id']}`);
         }, 5000);
       } catch (error) {
         console.log(error.message);
       }
-
-      //   // uploadImages(post.category, post.images)
-      //   //   .then(async (imagesURLs) => {
-      //   //     const postToAdd = { ...post, images: imagesURLs }
-      //   //     console.log(postToAdd)
-      //   //     const response = await httpAddPost(postToAdd)
-      //   //     console.log(response)
-      //   //     setPending(false)
-      //   //     //navigate(`/products/${response.data['_id']}`)
-      //   //     // if (response.ok) {
-      //   //     //   setPending(false)
-      //   //     //   navigate(`/products/${response.data['_id']}`)
-      //   //     // } else alert('Failed')
-      //   //   })
-      //   //   .catch((err) => console.log(err))
-      // }
     } else console.log('Image is require');
   };
   return (
