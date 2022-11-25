@@ -1,12 +1,12 @@
-import Home from '~/pages/Home'
-import PostDetail from '~/pages/PostDetail'
-import Login from '~/pages/Login'
-import Register from '~/pages/Register'
-import BlankLayout from '~/layouts/User/BlankLayout'
-import AddPost from '~/pages/AddPost'
-import Following from '~/pages/Following'
-import PostsSaved from '~/pages/PostsSaved'
-import ManagePosts from '~/pages/ManagePosts'
+import Home from '~/pages/Home';
+import PostDetail from '~/pages/PostDetail';
+import Login from '~/pages/Login';
+import Register from '~/pages/Register';
+import BlankLayout from '~/layouts/User/BlankLayout';
+import AddPost from '~/pages/AddPost';
+import Following from '~/pages/Following';
+import PostsSaved from '~/pages/PostsSaved';
+import ManagePosts from '~/pages/ManagePosts';
 
 export const publicRoute = [
   {
@@ -43,10 +43,10 @@ export const publicRoute = [
     path: 'managePosts',
     component: ManagePosts,
   },
-]
+];
 export const privateRoute = [
   {
     path: 'admin/dashboard',
     component: '',
   },
-]
+];
