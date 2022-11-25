@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ImageGallery from '~/components/Product/ImageGallery';
 import { httpGetPostById } from '~/apiServices/postService';
@@ -45,13 +45,15 @@ const postedBy = {
 function ProductDetail() {
   const { id } = useParams();
   const [post, setPost] = useState({});
-  useEffect(() => {
+  useLayoutEffect(() => {
     const getPostById = async () => {
       const response = await httpGetPostById(id);
-      setPost(response.data);
+      setPost(response);
+      console.log(id);
+      console.log(response);
     };
     getPostById();
-  }, [id]);
+  }, [ ]);
   return (
     <div className='bg-white'>
       {/* {product.filter(item => item.id === id).map(product => ( */}
@@ -64,7 +66,7 @@ function ProductDetail() {
             <li>
               <div className='flex items-center'>
                 <a className='mr-2 text-sm font-medium text-gray-900'>
-                  {post.category.name}
+                  {/* {post.category.name} */}
                 </a>
                 <svg
                   width={16}
@@ -98,7 +100,7 @@ function ProductDetail() {
               </div>
             </li>
             <li className='text-sm'>
-              {product.title}
+              {post.title}
               {/* <a
                 href={post.href}
                 aria-current="page"
@@ -142,7 +144,7 @@ function ProductDetail() {
             <div className='mt-10'>
               <div className='flex items-center justify-between'>
                 <h3 className='text-lg font-medium text-gray-900'>
-                  {postedBy.username}
+                  {/* {postedBy.username} */}
                 </h3>
                 <button
                   href='#'
@@ -159,7 +161,7 @@ function ProductDetail() {
             <div className='mt-10'>
               <div className='flex items-center justify-between'>
                 <p className=' text-red-600 text-3xl tracking-tight text-gray-900'>
-                  {product.price}
+                  {post.price}
                 </p>
                 <a
                   href='/save'
@@ -192,13 +194,13 @@ function ProductDetail() {
                   Ngày đăng: {product.datePosted}
                 </p>
                 <p className='text-base leading-4 mt-4 text-gray-600'>
-                  Hãng SX: {product.branchName}
+                  Hãng SX: {post.branchName}
                 </p>
                 <p className='text-base leading-4 mt-4 text-gray-600'>
-                  Năm SX: {product.year}
+                  Năm SX: {post.year}
                 </p>
                 <p className='text-base leading-4 mt-4 text-gray-600'>
-                  Bảo hành: {product.warranty}
+                  Bảo hành: {post.warranty}
                 </p>
               </div>
             </div>
@@ -207,7 +209,7 @@ function ProductDetail() {
               <h2 className='text-lg font-medium text-gray-900'>Khu vực</h2>
 
               <div className='mt-4 space-y-6'>
-                <p className='text-lg text-gray-600'>{product.address}</p>
+                <p className='text-lg text-gray-600'>{post.address}</p>
               </div>
             </div>
           </div>

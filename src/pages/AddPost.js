@@ -5,7 +5,6 @@ import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import { ImagesForm, GeneralForm, ProductForm } from '~/components/Form';
 import { uploadImages } from '~/apiServices/uploadImagesService';
 import { httpAddPost } from '~/apiServices/postService';
-import PostProvider from '~/contexts/PostProvider';
 
 const AddPost = () => {
   const list = ['GeneralForm', 'ProductForm', 'ImagesForm'];
@@ -30,36 +29,41 @@ const AddPost = () => {
         return <GeneralForm></GeneralForm>;
     }
   };
-  const { post, setPost } = useContext(PostContext);
+  const { post } = useContext(PostContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(post);
-    // if (post.images.length > 0) {
-    //   try {
-    //     setPending(true)
-    //     const imagesURLs = await uploadImages(post.category, post.images)
-    //     const response = await httpAddPost({ ...post, images: imagesURLs })
-    //     console.log(response)
-    //     setPending(false)
-    //   } catch (error) {
-    //     console.log(error.message)
-    //   }
+    if (post.images.length > 0) {
+      try {
+        setPending(true);
+        const imagesURLs = await uploadImages(post.category, post.images);
+        console.log('URLS: ', imagesURLs);
+        const newPost = { ...post, images: imagesURLs };
+        setTimeout(async () => {
+          const response = await httpAddPost(newPost);
+          console.log(response);
+          setPending(false);
+          navigate(`/products/${response.data['_id']}`);
+        }, 5000);
+      } catch (error) {
+        console.log(error.message);
+      }
 
-    //   // uploadImages(post.category, post.images)
-    //   //   .then(async (imagesURLs) => {
-    //   //     const postToAdd = { ...post, images: imagesURLs }
-    //   //     console.log(postToAdd)
-    //   //     const response = await httpAddPost(postToAdd)
-    //   //     console.log(response)
-    //   //     setPending(false)
-    //   //     //navigate(`/products/${response.data['_id']}`)
-    //   //     // if (response.ok) {
-    //   //     //   setPending(false)
-    //   //     //   navigate(`/products/${response.data['_id']}`)
-    //   //     // } else alert('Failed')
-    //   //   })
-    //   //   .catch((err) => console.log(err))
-    // }
+      //   // uploadImages(post.category, post.images)
+      //   //   .then(async (imagesURLs) => {
+      //   //     const postToAdd = { ...post, images: imagesURLs }
+      //   //     console.log(postToAdd)
+      //   //     const response = await httpAddPost(postToAdd)
+      //   //     console.log(response)
+      //   //     setPending(false)
+      //   //     //navigate(`/products/${response.data['_id']}`)
+      //   //     // if (response.ok) {
+      //   //     //   setPending(false)
+      //   //     //   navigate(`/products/${response.data['_id']}`)
+      //   //     // } else alert('Failed')
+      //   //   })
+      //   //   .catch((err) => console.log(err))
+      // }
+    } else console.log('Image is require');
   };
   return (
     <section className='max-w-screen-lg min-h-screen mx-auto bg-white p-8 flex flex-col text-center'>

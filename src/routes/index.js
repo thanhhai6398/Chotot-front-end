@@ -1,10 +1,10 @@
-import Home from '~/pages/Home'
-import ProductDetail from '~/pages/ProductDetail'
-import Login from '~/pages/Login'
-import Register from '~/pages/Register'
-import BlankLayout from '~/layouts/User/BlankLayout'
-import AddPost from '~/pages/AddPost'
-import SearchByImage from '~/pages/SearchByImage'
+import Home from '~/pages/Home';
+import ProductDetail from '~/pages/ProductDetail';
+import Login from '~/pages/Login';
+import Register from '~/pages/Register';
+import BlankLayout from '~/layouts/User/BlankLayout';
+import AddPost from '~/pages/AddPost';
+import SearchByImage from '~/pages/SearchByImage';
 
 export const publicRoute = [
   {
@@ -33,10 +33,10 @@ export const publicRoute = [
     path: 'search/img',
     component: SearchByImage,
   },
-]
+];
 export const privateRoute = [
   {
     path: 'admin/dashboard',
     component: '',
   },
-]
+];
