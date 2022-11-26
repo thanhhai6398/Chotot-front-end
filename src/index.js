@@ -8,12 +8,12 @@ import App from '~/App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <PostProvider>
-        <Router>
+    <Router>
+      <AuthProvider>
+        <PostProvider>
           <App />
-        </Router>
-      </PostProvider>
-    </AuthProvider>
+        </PostProvider>
+      </AuthProvider>
+    </Router>
   </React.StrictMode>
 );

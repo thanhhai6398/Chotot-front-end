@@ -5,16 +5,14 @@ export const httpGetPostById = async (id) => {
     const res = request.get(`/posts/${id}`);
     return res.data;
   } catch (error) {
-    console.log(error.data);
+    console.log(error.response.data);
   }
 };
 export const httpAddPost = async (payload) => {
   try {
-    // console.log('PAYLOAD: ', payload);
-    // console.log('JSON: ', JSON.stringify(payload));
     const res = request.post('/posts/upload', payload);
-    return res.data;
+    return res;
   } catch (error) {
-    console.log(error.data);
+    console.log(error.response.data);
   }
 };

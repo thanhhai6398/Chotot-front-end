@@ -1,8 +1,10 @@
-import { createContext, useState } from 'react';
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useEffect, useState } from 'react';
+import useAuth from '~/hooks/useAuth';
 export const PostContext = createContext({});
 
 const PostProvider = ({ children }) => {
+  const { auth } = useAuth();
   const initValue = {
     title: '',
     category: '',
@@ -16,8 +18,13 @@ const PostProvider = ({ children }) => {
     year: '',
     warranty: '',
     version: '',
-    postedBy: '633a9bd7169e0f178bfb859a',
+    postedBy: '',
   };
+  useEffect(() => {
+    if (auth.user) {
+      setPost({ ...post, postedBy: auth.user._id });
+    }
+  }, [auth]);
   const [post, setPost] = useState(initValue);
   return (
     <PostContext.Provider value={{ post, setPost }}>

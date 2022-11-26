@@ -7,7 +7,11 @@ import {
   AiOutlineUser,
   AiOutlineSearch,
 } from 'react-icons/ai';
+import useAuth from '~/hooks/useAuth';
+
 const Header = () => {
+  const { auth } = useAuth();
+  console.log(auth);
   const NAV_LINKS = [
     {
       text: 'Trang chủ',
@@ -54,17 +58,26 @@ const Header = () => {
           placeholder=' Tìm kiếm sản phẩm'
         ></input>
         <button className='bg-orange-500 rounded px-5 ml-1 w-14 h-10 text-center align-middle'>
-          <AiOutlineSearch className='text-2xl text-white' />{' '}
+          <AiOutlineSearch className='text-2xl text-white' />
         </button>
-        <Link
-          to=''
-          className='flex flex-row items-center text-center ml-24 px-5 text-lg'
-        >
-          <AiOutlineUser className='mr-3 text-2xl' /> Đăng nhập
-        </Link>
+        {auth.user ? (
+          <Link
+            to={`/user/${auth.user?._id}`}
+            className='flex flex-row items-center text-center ml-24 px-5 text-lg'
+          >
+            Xin chào, {auth.user?.username}
+          </Link>
+        ) : (
+          <Link
+            to='/auth'
+            className='flex flex-row items-center text-center ml-24 px-5 text-lg'
+          >
+            <AiOutlineUser className='mr-3 text-2xl' /> Đăng nhập
+          </Link>
+        )}
 
         <Link
-          to=''
+          to='/upload'
           className='bg-orange-500 rounded w-32 h-10 px-5 pt-1 text-center text-lg'
         >
           Đăng tin

@@ -24,7 +24,7 @@ export const publicRoute = [
     layout: BlankLayout,
   },
   {
-    path: 'addPost',
+    path: 'upload',
     component: AddPost,
   },
   {

@@ -8,7 +8,6 @@ const useAuth = () => {
   const { auth } = useContext(AuthContext);
   const { setValue } = useLocalStorage(LOCAL_STORAGE_KEY, {});
   useEffect(() => {
-    console.log(auth);
     setValue(auth);
   }, [auth]);
   useDebugValue(auth, (auth) => (auth?.user ? 'Logged In' : 'Logged Out'));
