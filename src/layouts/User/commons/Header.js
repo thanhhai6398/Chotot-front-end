@@ -6,8 +6,10 @@ import {
   AiOutlineHeart,
   AiOutlineUser,
   AiOutlineSearch,
+  AiOutlineDashboard,
 } from 'react-icons/ai';
 import useAuth from '~/hooks/useAuth';
+import ROLE from '~/utils/role_list';
 
 const Header = () => {
   const { auth } = useAuth();
@@ -21,12 +23,12 @@ const Header = () => {
     {
       text: 'Quản lý tin',
       icon: <AiOutlineDatabase />,
-      path: '/',
+      path: '/managePosts',
     },
     {
       text: 'Tin theo dõi',
       icon: <AiOutlineHeart />,
-      path: '/',
+      path: '/postsSaved',
     },
   ];
   const handleNavLinks = () => {
@@ -50,7 +52,19 @@ const Header = () => {
         >
           Chợ Đồ Cũ
         </Link>
-        <ul className='flex flex-row py-2 gap-10'>{handleNavLinks()}</ul>
+        <ul className='flex flex-row py-2 gap-10'>
+          {handleNavLinks()}
+          {auth?.user.roles.includes(ROLE.ADMIN) && (
+            <li key={NAV_LINKS.lenght}>
+              <Link to='/admin' className='flex flex-row items-center text-lg'>
+                <span className='text-2xl mr-2'>
+                  <AiOutlineDashboard />
+                </span>
+                Trang quản trị
+              </Link>
+            </li>
+          )}
+        </ul>
       </div>
       <div className='flex flex-row justify-between mt-2'>
         <input

@@ -1,6 +1,6 @@
-import React from 'react'
-import Postitem from '~/components/Postitem'
-import { post } from '~/utils/request'
+import React, { useEffect, useState } from 'react';
+import Postitem from '~/components/Postitem';
+import { post } from '~/utils/request';
 const posts = [
   {
     id: '1',
@@ -52,27 +52,29 @@ const posts = [
       address: 'Q4, Tp. HCM',
     },
   },
-]
+];
 const ManagePosts = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {}, []);
   return (
-    <div className="bg-white mx-auto max-w-xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-      <div className="p-4 border-b-2 border-primary">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex items-center">
+    <div className='bg-white mx-auto max-w-xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+      <div className='p-4 border-b-2 border-primary'>
+        <h2 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex items-center'>
           Quản lý tin{' '}
-          <span className="font-light ml-1 text-gray-400">- 10 tin</span>
+          <span className='font-light ml-1 text-gray-400'>- 10 tin</span>
         </h2>
       </div>
-      <ul className="p-4">
+      <ul className='p-4'>
         {posts.map((post) => {
           return (
             <li>
               <Postitem post={post} />
             </li>
-          )
+          );
         })}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default ManagePosts
+export default ManagePosts;
