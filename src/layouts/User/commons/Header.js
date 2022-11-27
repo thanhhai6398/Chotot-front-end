@@ -9,11 +9,10 @@ import {
   AiOutlineDashboard,
 } from 'react-icons/ai';
 import useAuth from '~/hooks/useAuth';
-import ROLE from '~/utils/role_list';
+import { ROLE } from '~/utils/Enum';
 
 const Header = () => {
   const { auth } = useAuth();
-  console.log(auth);
   const NAV_LINKS = [
     {
       text: 'Trang chủ',
@@ -54,7 +53,7 @@ const Header = () => {
         </Link>
         <ul className='flex flex-row py-2 gap-10'>
           {handleNavLinks()}
-          {auth?.user.roles.includes(ROLE.ADMIN) && (
+          {auth.user && auth.user.roles.includes(ROLE.ADMIN) && (
             <li key={NAV_LINKS.lenght}>
               <Link to='/admin' className='flex flex-row items-center text-lg'>
                 <span className='text-2xl mr-2'>

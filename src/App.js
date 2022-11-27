@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import RequireAuth from './components/RequireAuth';
 import { publicRoute, userRoute, adminRoute } from '~/routes';
 import DefaultLayout from '~/layouts/User/DefaultLayout';
 import Missing from './pages/Missing';
-import ROLE from '~/utils/role_list';
+import { ROLE } from '~/utils/Enum';
 import './App.css';
 
 function App() {

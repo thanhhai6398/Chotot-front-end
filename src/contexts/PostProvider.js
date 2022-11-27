@@ -25,9 +25,12 @@ const PostProvider = ({ children }) => {
       setPost({ ...post, postedBy: auth.user._id });
     }
   }, [auth]);
+  const handleClear = () => {
+    setPost(initValue);
+  };
   const [post, setPost] = useState(initValue);
   return (
-    <PostContext.Provider value={{ post, setPost }}>
+    <PostContext.Provider value={{ post, setPost, handleClear }}>
       {children}
     </PostContext.Provider>
   );

@@ -29,7 +29,7 @@ const AddPost = () => {
         return <GeneralForm></GeneralForm>;
     }
   };
-  const { post } = useContext(PostContext);
+  const { post, handleClear } = useContext(PostContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (post.images.length > 0) {
@@ -39,6 +39,7 @@ const AddPost = () => {
         const newPost = { ...post, images: imagesURLs };
         setTimeout(async () => {
           const response = await httpAddPost(newPost);
+          handleClear();
           console.log(response.data);
           setPending(false);
           /*=====pending
