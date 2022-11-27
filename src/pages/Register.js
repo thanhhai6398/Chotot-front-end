@@ -25,7 +25,7 @@ const Register = () => {
       setError('Số điện thoại hợp lệ!');
       return;
     }
-    if (!user.password === user.confirmPassword) {
+    if (user.password !== user.confirmPassword) {
       setError('Mật khẩu không trùng khớp!');
       return;
     }
@@ -38,7 +38,7 @@ const Register = () => {
         phone: user.phone,
         username: user.username,
         password: user.password,
-        addredd: user.address,
+        address: user.address,
       };
       const response = await register(newUser);
       setError('');

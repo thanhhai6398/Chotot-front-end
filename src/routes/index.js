@@ -2,15 +2,22 @@ import Home from '~/pages/Home';
 import PostDetail from '~/pages/PostDetail';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
+
+//LAYOUT
 import BlankLayout from '~/layouts/User/BlankLayout';
+import AdminLayout from '~/layouts/Admin/AdminLayout';
+//USER
 import AddPost from '~/pages/AddPost';
 import Following from '~/pages/Following';
 import PostsSaved from '~/pages/PostsSaved';
 import ManagePosts from '~/pages/ManagePosts';
 
+//ADMIN
+import Dashboard from '~/pages/Admin/Dashboard';
+
 export const publicRoute = [
   {
-    path: '',
+    path: '/',
     component: Home,
   },
   {
@@ -23,13 +30,17 @@ export const publicRoute = [
     component: Register,
     layout: BlankLayout,
   },
-  {
-    path: 'addPost',
-    component: AddPost,
-  },
+
   {
     path: 'posts/:id',
     component: PostDetail,
+  },
+];
+
+export const userRoute = [
+  {
+    path: 'upload',
+    component: AddPost,
   },
   {
     path: 'following',
@@ -44,9 +55,10 @@ export const publicRoute = [
     component: ManagePosts,
   },
 ];
-export const privateRoute = [
+export const adminRoute = [
   {
-    path: 'admin/dashboard',
-    component: '',
+    path: 'admin',
+    component: Dashboard,
+    layout: AdminLayout,
   },
 ];

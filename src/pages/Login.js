@@ -15,13 +15,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(user);
       const response = await auth(user);
       const userLogged = response.user;
       const accessToken = response?.accessToken;
       setAuth({ user: userLogged, accessToken });
       setUser(initValue);
       setError('');
+      navigate('/');
     } catch (error) {
       setError(error.response.data.errMsg);
     }

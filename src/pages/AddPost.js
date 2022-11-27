@@ -29,20 +29,22 @@ const AddPost = () => {
         return <GeneralForm></GeneralForm>;
     }
   };
-  const { post } = useContext(PostContext);
+  const { post, handleClear } = useContext(PostContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (post.images.length > 0) {
       try {
         setPending(true);
         const imagesURLs = await uploadImages(post.category, post.images);
-        console.log('URLS: ', imagesURLs);
         const newPost = { ...post, images: imagesURLs };
         setTimeout(async () => {
           const response = await httpAddPost(newPost);
-          console.log(response);
+          handleClear();
+          console.log(response.data);
           setPending(false);
-          navigate(`/products/${response['_id']}`);
+          /*=====pending
+          navigate(`/post/${response.data['_id']}`);
+          */
         }, 5000);
       } catch (error) {
         console.log(error.message);
