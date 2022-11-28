@@ -12,7 +12,7 @@ const ManagePosts = () => {
       const response = await httpGetPostByUserId(auth?.user._id);
       console.log(response);
       setPosts(response.data);
-      setCount(response.count);
+      setCount(response.data?.length);
     };
     getPosts();
   }, []);

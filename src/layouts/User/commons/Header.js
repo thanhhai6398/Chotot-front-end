@@ -55,7 +55,10 @@ const Header = () => {
           {handleNavLinks()}
           {auth.user && auth.user.roles.includes(ROLE.ADMIN) && (
             <li key={NAV_LINKS.lenght}>
-              <Link to='/admin' className='flex flex-row items-center text-lg'>
+              <Link
+                to='/admin/dashboard'
+                className='flex flex-row items-center text-lg'
+              >
                 <span className='text-2xl mr-2'>
                   <AiOutlineDashboard />
                 </span>
@@ -75,7 +78,7 @@ const Header = () => {
         </button>
         {auth.user ? (
           <Link
-            to={`/user/${auth.user?._id}`}
+            to={`/personal/${auth.user?._id}`}
             className='flex flex-row items-center text-center ml-24 px-5 text-lg'
           >
             Xin chào, {auth.user?.username}
