@@ -7,3 +7,4 @@ export const POST_STATUS = {
   ACTIVE: 1,
   HIDE: 2,
 };
+export const LOCAL_STORAGE_KEY = 'CHOTOT_USER';
