@@ -42,9 +42,8 @@ const AddPost = () => {
           handleClear();
           console.log(response.data);
           setPending(false);
-          /*=====pending
-          navigate(`/post/${response.data['_id']}`);
-          */
+          /* */
+          navigate('/managePosts');
         }, 5000);
       } catch (error) {
         console.log(error.message);

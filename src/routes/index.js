@@ -11,6 +11,7 @@ import AddPost from '~/pages/AddPost';
 import Following from '~/pages/Following';
 import PostsSaved from '~/pages/PostsSaved';
 import ManagePosts from '~/pages/ManagePosts';
+import Personal from '~/pages/Personal';
 
 //ADMIN
 import Dashboard from '~/pages/Admin/Dashboard';
@@ -47,6 +48,10 @@ export const userRoute = [
     component: Following,
   },
   {
+    path: '/personal/:id',
+    component: Personal,
+  },
+  {
     path: 'postsSaved',
     component: PostsSaved,
   },
@@ -57,7 +62,7 @@ export const userRoute = [
 ];
 export const adminRoute = [
   {
-    path: 'admin',
+    path: 'dashboard',
     component: Dashboard,
     layout: AdminLayout,
   },

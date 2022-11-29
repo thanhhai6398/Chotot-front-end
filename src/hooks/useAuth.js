@@ -1,18 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useContext, useDebugValue, useEffect } from 'react';
+import { useContext, useDebugValue, useEffect } from 'react';
 import { AuthContext } from '~/contexts/AuthProvider';
 import useLocalStorage from './useLocalStorage';
+import { LOCAL_STORAGE_KEY } from '~/utils/Enum';
 
-const LOCAL_STORAGE_KEY = 'CHOTOT_USER';
 const useAuth = () => {
-  const { auth, setAuth } = useContext(AuthContext);
-  const { storedValue, setValue } = useLocalStorage(LOCAL_STORAGE_KEY, {});
-  useEffect(
-    useCallback(() => {
-      auth.user || setAuth(storedValue);
-    }),
-    []
-  );
+  const { auth } = useContext(AuthContext);
+  const { setValue } = useLocalStorage(LOCAL_STORAGE_KEY, {});
   useEffect(() => {
     setValue(auth);
   }, [auth]);
