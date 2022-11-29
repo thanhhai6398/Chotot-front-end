@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ListCategories from '~/components/ListCategories';
 import Posts from '~/components/Post/Posts';
+import {useState,} from 'react';
+import { httpAddPost, httpGetAllPost } from '~/apiServices/postService';
 const categories = [
   {
     name: 'Do dien tu',
@@ -45,10 +47,23 @@ const categories = [
 ];
 
 const Home = () => {
+  const [post,setPost] = useState([]);
+
+  useEffect(()=>{
+    const getAllPost = async () =>{
+      const response = await httpGetAllPost();
+      console.log(response);
+      setPost(response.data);
+    }; 
+    getAllPost();
+  },[]);
+
+  
+
   return (
     <div className='mx-auto max-w-5xl lg:max-w-7xl lg:px-8 py-3 px-2'>
       <ListCategories categories={categories} />
-      <Posts />
+      <Posts post ={post}/>
     </div>
   );
 };

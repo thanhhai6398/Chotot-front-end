@@ -1,12 +1,13 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 const PostItem = (props) => {
     const { post } = props;
     
     return (
         <div className="bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl hover:scale-105 p-4 rounded-lg relative">
-            <a href={"/posts/" + post.id}>    
+            <Link to = {`/posts/${post._id}`} >    
                 <div>
-                    <img className="w-64 mx-auto transform transition duration-300 hover:scale-105" src={post.image} alt=""/>
+                    <img className="w-64 mx-auto transform transition duration-300 hover:scale-105" src={post.images[0]} alt="hinh"/>
                     <div >
                         <button className="text-red-600">
                             <svg class="text-red-400 w-6 h-auto fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -27,7 +28,7 @@ const PostItem = (props) => {
                         {post.address}
                     </div>
                 </div>
-            </a>
+            </Link>
         </div>
     )
 }

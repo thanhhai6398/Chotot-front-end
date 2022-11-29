@@ -3,7 +3,7 @@ import * as request from '~/utils/request';
 export const httpGetPostById = async (id) => {
   try {
     const res = request.get(`/posts/${id}`);
-    return res.data;
+    return res;
   } catch (error) {
     console.log(error.response.data);
   }
@@ -44,3 +44,13 @@ export const httpPutHidePost = (id) => {
     console.log(error.response.data);
   }
 };
+
+export const httpGetAllPost = ( limit = 12, offSet = 1) => {
+  try {
+    const res = request.get(`/posts?limit=${limit}&offSet=${offSet}`);
+    console.log(res.data);
+    return res;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+}

@@ -1,46 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { httpGetPostById } from '~/apiServices/postService'
 import ImageGallery from '~/components/Post/ImageGallery'
-const post = {
-  id: '1',
-  title: 'iPhone 13 Pro Max 256G VN - Zin chuẩn',
-  price: '23.900.000',
-  href: '#',
-  category: 'Dien thoai',
-  branchName: 'Apple',
-  year: '2020',
-  warranty: 'Không',
-  datePosted: '',
-  images: [
-    {
-      src: 'https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-xanh-xa-1.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-xanh-xa-1.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-xanh-xa-1.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://scontent.fsgn5-7.fna.fbcdn.net/v/t45.1600-4/306991146_23851438539690142_3932150892504056361_n.png?stp=c0.0.540.540a_cp0_dst-jpg_p180x540_q90_spS444&_nc_cat=1&ccb=1-7&_nc_sid=de7202&_nc_ohc=8A02jLPdiF8AX8kk6vY&_nc_ht=scontent.fsgn5-7.fna&oh=00_AfDcMG8ZnT-P1cKv3KZ5h-a1Qo3acwIYwdKqkPlSzgy8JQ&oe=6378A93C',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-  ],
-  description:
-    'Cam kết zin nguyên bản - Không Zin Tặng Máy - ( Bảo hành 1/2023 Chính Hãng VN ) - Zin chất đẹp 99%',
-  address: 'Phường 13, Quận 4, Tp Hồ Chí Minh',
-  postedBy: {
-    username: 'Thanh Phong Store',
-    phone: '0335489456',
-    address: 'Thủ Đức, Tp. HCM',
-  },
-}
+// const post = {
+//   id: '1',
+//   title: 'iPhone 13 Pro Max 256G VN - Zin chuẩn',
+//   price: '23.900.000',
+//   href: '#',
+//   category: 'Dien thoai',
+//   branchName: 'Apple',
+//   year: '2020',
+//   warranty: 'Không',
+//   datePosted: '',
+//   images: [
+//     {
+//       src: 'https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-xanh-xa-1.jpg',
+//       alt: 'Two each of gray, white, and black shirts laying flat.',
+//     },
+//     {
+//       src: 'https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-xanh-xa-1.jpg',
+//       alt: 'Two each of gray, white, and black shirts laying flat.',
+//     },
+//     {
+//       src: 'https://cdn.tgdd.vn/Products/Images/42/230529/iphone-13-pro-xanh-xa-1.jpg',
+//       alt: 'Two each of gray, white, and black shirts laying flat.',
+//     },
+//     {
+//       src: 'https://scontent.fsgn5-7.fna.fbcdn.net/v/t45.1600-4/306991146_23851438539690142_3932150892504056361_n.png?stp=c0.0.540.540a_cp0_dst-jpg_p180x540_q90_spS444&_nc_cat=1&ccb=1-7&_nc_sid=de7202&_nc_ohc=8A02jLPdiF8AX8kk6vY&_nc_ht=scontent.fsgn5-7.fna&oh=00_AfDcMG8ZnT-P1cKv3KZ5h-a1Qo3acwIYwdKqkPlSzgy8JQ&oe=6378A93C',
+//       alt: 'Two each of gray, white, and black shirts laying flat.',
+//     },
+//   ],
+//   description:
+//     'Cam kết zin nguyên bản - Không Zin Tặng Máy - ( Bảo hành 1/2023 Chính Hãng VN ) - Zin chất đẹp 99%',
+//   address: 'Phường 13, Quận 4, Tp Hồ Chí Minh',
+//   postedBy: {
+//     username: 'Thanh Phong Store',
+//     phone: '0335489456',
+//     address: 'Thủ Đức, Tp. HCM',
+//   },
+// }
 
 function PostDetail() {
   const { id } = useParams()
+  const [post, setPost] = useState({});
+  useLayoutEffect( ()=>{
+    const getPostById = async() =>{
+      const response = await httpGetPostById(id);
+      console.log(response.data);
+      setPost(response.data);
+    }
+    getPostById();
+  },[id]);
+
   return (
     <div className="bg-white">
       {/* {product.filter(item => item.id === id).map(product => ( */}
