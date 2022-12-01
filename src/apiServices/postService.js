@@ -1,6 +1,7 @@
 import * as request from '~/utils/request';
+import { POST_STATUS } from '~/utils/Enum';
 
-export const httpGetPostById = async (id) => {
+export const httpGetPostById = (id) => {
   try {
     const res = request.get(`/posts/${id}`);
     return res;
@@ -8,7 +9,30 @@ export const httpGetPostById = async (id) => {
     console.log(error.response.data);
   }
 };
-export const httpAddPost = async (payload) => {
+export const httpGetAllPost = (size = 12, page = 1) => {
+  try {
+    const res = request.get(`/posts?size=${size}&page=${page}`);
+    return res;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+export const httpGetPostByStatusId = (
+  size = 12,
+  page = 1,
+  status = POST_STATUS.ACTIVE
+) => {
+  try {
+    const res = request.get(
+      `/posts/status/${status}?size=${size}&page=${page}`
+    );
+    return res;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
+export const httpAddPost = (payload) => {
   try {
     const res = request.post('/posts/upload', payload);
     return res;
@@ -42,13 +66,3 @@ export const httpPutHidePost = (id) => {
     console.log(error.response.data);
   }
 };
-
-export const httpGetAllPost = ( limit = 12, offSet = 1) => {
-  try {
-    const res = request.get(`/posts?limit=${limit}&offSet=${offSet}`);
-    console.log(res.data);
-    return res;
-  } catch (error) {
-    console.log(error.response.data);
-  }
-}
