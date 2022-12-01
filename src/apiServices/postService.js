@@ -3,7 +3,7 @@ import * as request from '~/utils/request';
 export const httpGetPostById = async (id) => {
   try {
     const res = request.get(`/posts/${id}`);
-    return res.data;
+    return res;
   } catch (error) {
     console.log(error.response.data);
   }
@@ -17,11 +17,9 @@ export const httpAddPost = async (payload) => {
   }
 };
 
-export const httpGetPostByUserId = (userId, limit = 10, offSet = 1) => {
+export const httpGetPostByUserId = (userId, size = 12, page = 1) => {
   try {
-    const res = request.get(
-      `/posts/user/${userId}?limit=${limit}&offSet=${offSet}`
-    );
+    const res = request.get(`/posts/user/${userId}?size=${size}&page=${page}`);
     return res;
   } catch (error) {
     console.log(error.response.data);
