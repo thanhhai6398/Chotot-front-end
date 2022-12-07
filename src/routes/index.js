@@ -2,12 +2,14 @@ import Home from '~/pages/Home';
 import PostDetail from '~/pages/PostDetail';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
+import SearchResult from '~/pages/SearchResult';
 
 //LAYOUT
 import BlankLayout from '~/layouts/User/BlankLayout';
 import AdminLayout from '~/layouts/Admin/AdminLayout';
 //USER
 import AddPost from '~/pages/AddPost';
+import EditPost from '~/pages/EditPost';
 import Following from '~/pages/Following';
 import PostsSaved from '~/pages/PostsSaved';
 import ManagePosts from '~/pages/ManagePosts';
@@ -36,12 +38,20 @@ export const publicRoute = [
     path: 'posts/:id',
     component: PostDetail,
   },
+  {
+    path: 'search',
+    component: SearchResult,
+  },
 ];
 
 export const userRoute = [
   {
     path: 'upload',
     component: AddPost,
+  },
+  {
+    path: 'edit/:id',
+    component: EditPost,
   },
   {
     path: 'following',

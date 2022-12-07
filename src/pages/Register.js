@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!phoneValidation(user.phone)) {
-      setError('Số điện thoại hợp lệ!');
+      setError('Số điện thoại không hợp lệ!');
       return;
     }
     if (user.password !== user.confirmPassword) {

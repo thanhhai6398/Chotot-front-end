@@ -10,14 +10,13 @@ const ManagePosts = () => {
   useEffect(() => {
     const getPosts = async () => {
       const response = await httpGetPostByUserId(auth?.user._id);
-      console.log(response);
       setPosts(response.data);
       setCount(response.data?.length);
     };
     getPosts();
   }, []);
   return (
-    <div className='bg-white mx-auto max-w-xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+    <div className='bg-white mx-auto max-w-xl py-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8'>
       <div className='p-4 border-b-2 border-primary'>
         <h2 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl flex items-center'>
           Quản lý tin{' '}

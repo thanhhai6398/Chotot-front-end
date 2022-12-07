@@ -9,6 +9,7 @@ export const httpGetPostById = (id) => {
     console.log(error.response.data);
   }
 };
+
 export const httpGetAllPost = (size = 12, page = 1) => {
   try {
     const res = request.get(`/posts?size=${size}&page=${page}`);
@@ -41,6 +42,15 @@ export const httpAddPost = (payload) => {
   }
 };
 
+export const httpEditPost = (id, payload) => {
+  try {
+    const res = request.put(`/posts/edit/${id}`, payload);
+    return res;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
 export const httpGetPostByUserId = (userId, size = 12, page = 1) => {
   try {
     const res = request.get(`/posts/user/${userId}?size=${size}&page=${page}`);
@@ -61,6 +71,14 @@ export const httpPutActivePost = (id) => {
 export const httpPutHidePost = (id) => {
   try {
     const res = request.put(`/posts/hide/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+export const httpSearchByName = (keyword) => {
+  try {
+    const res = request.get(`/posts/search/${keyword}`);
     return res;
   } catch (error) {
     console.log(error.response.data);

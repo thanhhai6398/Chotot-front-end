@@ -2,17 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import useAuth from '~/hooks/useAuth';
-import useLocalStorage from '~/hooks/useLocalStorage';
-import { LOCAL_STORAGE_KEY } from '~/utils/Enum';
+import { logout } from '~/apiServices/authServices';
 
 const Personal = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { removeValue } = useLocalStorage(LOCAL_STORAGE_KEY, {});
   const { setAuth } = useAuth();
-
-  const handleLogout = () => {
-    //removeValue();
+  const handleLogout = async () => {
+    const res = await logout();
     setAuth({});
     navigate('/');
   };

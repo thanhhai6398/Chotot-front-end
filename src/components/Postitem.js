@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { POST_STATUS } from '~/utils/Enum';
 import { httpPutActivePost, httpPutHidePost } from '~/apiServices/postService';
 
 const Postitem = ({ post }) => {
   const [postItem, setPostItem] = useState(post);
+  const navigate = useNavigate();
   const handleUpdateStatus = async () => {
     const id = post._id;
     if (postItem.status === POST_STATUS.ACTIVE) {
@@ -14,6 +16,9 @@ const Postitem = ({ post }) => {
       const response = await httpPutActivePost(id);
       setPostItem(response.data);
     }
+  };
+  const handleUpdatePost = () => {
+    navigate(`/edit/${post._id}`, { state: { post: post } });
   };
   return (
     <div className='flex py-6 border-b'>
@@ -54,6 +59,7 @@ const Postitem = ({ post }) => {
           <div className='flex'>
             <button
               type='button'
+              onClick={handleUpdatePost}
               className='font-medium py-2 px-4 bg-primary text-white mr-4 rounded hover:opacity-70'
             >
               Cập nhật

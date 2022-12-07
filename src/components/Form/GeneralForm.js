@@ -21,7 +21,7 @@ const GeneralForm = () => {
       <h2 className='font-medium text-2xl'>Thông tin chung</h2>
       <form className='flex flex-col text-gray-500'>
         <SelectCategory
-          currentValue={input.category}
+          currentValue={input.category._id || input.category}
           handleChange={handleChange}
         />
         <input

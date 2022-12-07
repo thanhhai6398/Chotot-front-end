@@ -1,12 +1,19 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { PostContext } from '~/contexts/PostProvider';
 import { uploadImages } from '~/apiServices/uploadImagesService';
-import { httpAddPost } from '~/apiServices/postService';
 import Form from '~/components/Form/Form';
-const AddPost = () => {
-  const { post, handleClear } = useContext(PostContext);
+import { httpEditPost } from '~/apiServices/postService';
+
+const EditPost = () => {
+  const { post, setPost, handleClear } = useContext(PostContext);
   const [isPending, setPending] = useState(false);
+  const { id } = useParams();
+  const currentPost = useLocation().state.post;
+  useEffect(() => {
+    setPost(currentPost);
+  }, [id]);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +23,7 @@ const AddPost = () => {
         const imagesURLs = await uploadImages(post.category, post.images);
         const newPost = { ...post, images: imagesURLs };
         setTimeout(async () => {
-          const response = await httpAddPost(newPost);
+          const response = null;
           handleClear();
           console.log(response.data);
           setPending(false);
@@ -31,4 +38,4 @@ const AddPost = () => {
   return <Form handleSubmit={handleSubmit} isPending={isPending} />;
 };
 
-export default AddPost;
+export default EditPost;
