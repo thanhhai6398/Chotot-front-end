@@ -24,11 +24,10 @@ const BiographicalPage = () => {
             <div className="border-b-2 border-slate-200 mb-12"></div>
             <div>{user.username}</div>
             <div>
-                <Link to="">{} người theo dõi</Link>
                 <Link to="">{user.fowllowing.length} đang theo dõi</Link>
             </div>
             <button> + Theo dõi</button>
-            <Link to='' className="">Chỉnh sửa</Link>
+            <Link to='/user/edit/id' className="">Chỉnh sửa</Link>
         </div>
     );
 };
