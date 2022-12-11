@@ -84,3 +84,19 @@ export const httpSearchByName = (keyword) => {
     console.log(error.response.data);
   }
 };
+export const httpGetPostsSaved = () => {
+  try {
+    const res = request.get('/users/getPostsSaved');
+    return res;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+export const httpGetFollowing = () => {
+  try {
+    const res = request.get('/users/getFollowing');
+    return res;
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};

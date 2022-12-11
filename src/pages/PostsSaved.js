@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { httpGetPostsSaved } from "~/apiServices/postService";
+import * as request from '~/utils/request';
 const posts = [
     {
         id: '1',
@@ -54,40 +56,65 @@ const posts = [
     }
 ]
 function PostsSaved() {
+    const [listPostsSaved, setListPostsSaved] = useState([]);
+    useEffect(() => {
+        const getPostsSaved = async () => {
+            const response = await httpGetPostsSaved();
+            console.log(response.postsSaved);
+            setListPostsSaved(response.postsSaved);
+          };
+        getPostsSaved();
+    }, []);
+    const unSave = async (postId, payload) => {
+        try {
+            const {data} = await request.patch(`/posts/unSavePost/${postId}`, payload);
+            window.location.reload(false);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Tin đã lưu</h1>
                 <div className="grid grid-cols-1 gap-y-10">
-                    {
-                        posts.map((post, index) => (
-                            <div className="flex py-6">
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <img className="h-full w-full object-cover object-center" src={post.images[0].src} />
-                                </div>
+                    {listPostsSaved.length > 0 ? (
+                        <div>
+                            {
+                                listPostsSaved.map((post, index) => (
+                                    <div className="flex py-6">
+                                        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                            <img className="h-full w-full object-cover object-center" src={post.images[0]} />
+                                        </div>
 
-                                <div className="ml-4 flex flex-1 flex-col">
-                                    <div>
-                                        <div className="flex justify-between text-base font-medium text-gray-900">
-                                            <h3>
-                                                <a href="#">{post.title}</a>
-                                            </h3>
+                                        <div className="ml-4 flex flex-1 flex-col">
+                                            <div>
+                                                <div className="flex justify-between text-base font-medium text-gray-900">
+                                                    <h3>
+                                                        <a href="#">{post.title}</a>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <p className="text-red-600 text-l">{post.price}</p>
+                                            </div>
+                                            <div className="flex flex-1 items-end justify-between text-sm">
+                                                <p className="text-gray-500">{post.postedBy.username} - {post.address}</p>
+
+                                                <div className="flex">
+                                                    <button type="button" onClick={() => unSave(post._id)} className="font-medium text-indigo-600 hover:text-indigo-500">Bỏ lưu</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="flex justify-between">
-                                        <p className="text-red-600 text-l">{post.price}</p>
-                                    </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                        <p className="text-gray-500">{post.postedBy.username} - {post.address}</p>
-
-                                        <div className="flex">
-                                            <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">Bỏ lưu</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    }
+                                ))
+                            }
+                        </div>
+                    ) : (
+                        <div className=' w-full text-center my-5  '>
+                            User is not saving Post!
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

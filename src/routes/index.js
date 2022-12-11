@@ -41,7 +41,7 @@ export const publicRoute = [
   {
     path: 'search',
     component: SearchResult,
-  },
+  }
 ];
 
 export const userRoute = [
@@ -53,21 +53,22 @@ export const userRoute = [
     path: 'edit/:id',
     component: EditPost,
   },
-  {
-    path: 'following',
-    component: Following,
-  },
+  
   {
     path: '/personal/:id',
     component: Personal,
   },
   {
-    path: 'postsSaved',
-    component: PostsSaved,
-  },
-  {
     path: 'managePosts',
     component: ManagePosts,
+  },
+  {
+    path: 'following',
+    component: Following,
+  },
+  {
+    path: 'postsSaved',
+    component: PostsSaved,
   },
 ];
 export const adminRoute = [
