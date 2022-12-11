@@ -57,18 +57,19 @@ const posts = [
 ]
 function PostsSaved() {
     const [listPostsSaved, setListPostsSaved] = useState([]);
+    const getPostsSaved = async () => {
+        const response = await httpGetPostsSaved();
+        console.log(response.postsSaved);
+        setListPostsSaved(response.postsSaved);
+    };
     useEffect(() => {
-        const getPostsSaved = async () => {
-            const response = await httpGetPostsSaved();
-            console.log(response.postsSaved);
-            setListPostsSaved(response.postsSaved);
-          };
+
         getPostsSaved();
     }, []);
     const unSave = async (postId, payload) => {
         try {
-            const {data} = await request.patch(`/posts/unSavePost/${postId}`, payload);
-            window.location.reload(false);
+            const { newUser } = await request.patch(`/posts/unSavePost/${postId}`, payload);
+            getPostsSaved();
         } catch (error) {
             console.log(error);
         }

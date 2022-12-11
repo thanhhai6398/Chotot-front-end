@@ -21,7 +21,7 @@ const Detail = ({ post }) => {
   const searchValue = (postId, array) => {
     let new_array = [];
     for (let i = 0; i < array.length; i++) {
-      if (array[i]._id === postId) {
+      if (array[i]._id === postId || array[i] === postId) {
         new_array.push(array[i]);
       }
     }
@@ -30,8 +30,9 @@ const Detail = ({ post }) => {
   const save = async (postId, payload) => {
     setSaveLoading(true);
     try {
-      const { data } = await request.patch(`/posts/savePost/${postId}`, payload);
-      window.location.reload(false);
+      const { newUser } = await request.patch(`/posts/savePost/${postId}`, payload);
+      console.log(newUser.postsSaved);
+      setListPostsSaved(newUser.postsSaved);
     } catch (error) {
       console.log(error);
     }
@@ -40,8 +41,8 @@ const Detail = ({ post }) => {
   const unSave = async (postId, payload) => {
     setSaveLoading(true);
     try {
-      const { data } = await request.patch(`/posts/unsavePost/${postId}`, payload);
-      window.location.reload(false);
+      const { newUser } = await request.patch(`/posts/unsavePost/${postId}`, payload);
+      setListPostsSaved(newUser.postsSaved);
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +141,7 @@ const Detail = ({ post }) => {
                   <p className=' text-red-600 text-3xl tracking-tight'>
                     {post.price}
                   </p>
-                  { searchValue(post._id, listPostsSaved).length>0 ? (
+                  { searchValue(post._id, listPostsSaved).length >0 ? (
                     <button
                       className=' py-[6px] flex items-center justify-center gap-x-1 w-full rounded-sm hover:bg-[#e0e0e0] text-[#c22727] dark:hover:bg-[#3A3B3C] font-semibold text-[15px] dark:text-[#c22727] transition-50 cursor-pointer  '
                       onClick={() => unSave(post._id)}

@@ -13,19 +13,19 @@ const following = [
 ]
 function Following() {
     const [listFollowing, setListFollowing] = useState([]);
+    const getPostsSaved = async () => {
+        const response = await httpGetFollowing();
+        console.log(response.following);
+        setListFollowing(response.following);
+    };
     useEffect(() => {
-        const getPostsSaved = async () => {
-            const response = await httpGetFollowing();
-            console.log(response.following);
-            setListFollowing(response.following);
-          };
         getPostsSaved();
     }, []);
 
     const unFollow = async (userId, payload) => {
         try {
-            const {data} = await request.patch(`/users/unfollow/${userId}`, payload);
-            window.location.reload(false);
+            const { newUser } = await request.patch(`/users/unfollow/${userId}`, payload);
+            getPostsSaved();
         } catch (error) {
             console.log(error);
         }
@@ -38,25 +38,25 @@ function Following() {
                 <div className="grid grid-cols-1 gap-y-10">
                     {listFollowing.length > 0 ? (
                         <div>
-                        {
-                            listFollowing.map((user, index) => (
-                                <div className="flex py-4">
-                                    <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                                        <svg class="absolute -left-1 w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                                    </div>
+                            {
+                                listFollowing.map((user, index) => (
+                                    <div className="flex py-4">
+                                        <div className="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                                            <svg class="absolute -left-1 w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                                        </div>
 
-                                    <div className="ml-4 mt-2 flex flex-1 flex-col">
-                                        <div className="flex justify-between">
-                                            <p className="text-black-600 text-l">{user.username}</p>
+                                        <div className="ml-4 mt-2 flex flex-1 flex-col">
+                                            <div className="flex justify-between">
+                                                <p className="text-black-600 text-l">{user.username}</p>
 
-                                            <div className="flex">
-                                                <button type="button" onClick={() => unFollow(user._id)} className="font-medium text-indigo-600 hover:text-indigo-500">Bỏ theo dõi</button>
+                                                <div className="flex">
+                                                    <button type="button" onClick={() => unFollow(user._id)} className="font-medium text-indigo-600 hover:text-indigo-500">Bỏ theo dõi</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))
-                        }
+                                ))
+                            }
                         </div>
                     ) : (
                         <div className=' w-full text-center my-5  '>
