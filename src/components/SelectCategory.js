@@ -6,25 +6,7 @@ const SelectCategory = ({ currentValue, handleChange }) => {
   useEffect(() => {
     const getAllCategories = async () => {
       const response = await httpGetAllCategories();
-      // const response = [
-      //   {
-      //     _id: '1',
-      //     name: 'AAAA',
-      //   },
-      //   {
-      //     _id: '2',
-      //     name: 'BAAA',
-      //   },
-      //   {
-      //     _id: '3',
-      //     name: 'CAAA',
-      //   },
-      //   {
-      //     _id: '4',
-      //     name: 'DAAA',
-      //   },
-      // ];
-      setCategories(response);
+      setCategories(response.data);
     };
     getAllCategories();
   }, []);

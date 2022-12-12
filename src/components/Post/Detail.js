@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import ImageGallery from './ImageGallery';
 
 const Detail = ({ post }) => {
-  console.log(post);
   return (
     post.images && (
       <div className='bg-white'>

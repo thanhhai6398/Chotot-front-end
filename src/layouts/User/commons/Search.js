@@ -9,6 +9,7 @@ const Search = () => {
   const handleClick = async () => {
     const result = await httpSearchByName(inputRef.current.value);
     navigate('/search', { state: { result: result.data } });
+    inputRef.current.value = '';
   };
   return (
     <div className='flex-1 flex items-center'>

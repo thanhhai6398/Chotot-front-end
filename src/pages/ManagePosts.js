@@ -14,7 +14,7 @@ const ManagePosts = () => {
       setCount(response.data?.length);
     };
     getPosts();
-  }, []);
+  }, [posts]);
   return (
     <div className='bg-white mx-auto max-w-xl py-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8'>
       <div className='p-4 border-b-2 border-primary'>

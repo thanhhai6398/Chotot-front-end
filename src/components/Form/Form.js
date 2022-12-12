@@ -28,7 +28,6 @@ const Form = (props) => {
 
   return (
     <section className='max-w-screen-lg min-h-screen mx-auto bg-white p-8 flex flex-col text-center'>
-      {console.log('render...')}
       {isPending && <p>Loading.....</p>}
       <div className='mx-auto rounded-lg w-3/4 px-8 py-4'>{handleForm()}</div>
       <div className='my-8 text-white text-bold'>

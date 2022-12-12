@@ -14,6 +14,7 @@ import Following from '~/pages/Following';
 import PostsSaved from '~/pages/PostsSaved';
 import ManagePosts from '~/pages/ManagePosts';
 import Personal from '~/pages/Personal';
+import BiographicalPage from '~/pages/BiographPage';
 
 //ADMIN
 import Dashboard from '~/pages/Admin/Dashboard';

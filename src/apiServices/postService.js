@@ -6,7 +6,7 @@ export const httpGetPostById = (id) => {
     const res = request.get(`/posts/${id}`);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 
@@ -15,7 +15,7 @@ export const httpGetAllPost = (size = 12, page = 1) => {
     const res = request.get(`/posts?size=${size}&page=${page}`);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 export const httpGetPostByStatusId = (
@@ -29,7 +29,7 @@ export const httpGetPostByStatusId = (
     );
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 
@@ -38,16 +38,17 @@ export const httpAddPost = (payload) => {
     const res = request.post('/posts/upload', payload);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 
 export const httpEditPost = (id, payload) => {
   try {
+    console.log('CALL API');
     const res = request.put(`/posts/edit/${id}`, payload);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 
@@ -56,7 +57,7 @@ export const httpGetPostByUserId = (userId, size = 12, page = 1) => {
     const res = request.get(`/posts/user/${userId}?size=${size}&page=${page}`);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 
@@ -65,7 +66,7 @@ export const httpPutActivePost = (id) => {
     const res = request.put(`/posts/active/${id}`);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 export const httpPutHidePost = (id) => {
@@ -73,7 +74,7 @@ export const httpPutHidePost = (id) => {
     const res = request.put(`/posts/hide/${id}`);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };
 export const httpSearchByName = (keyword) => {
@@ -81,6 +82,6 @@ export const httpSearchByName = (keyword) => {
     const res = request.get(`/posts/search/${keyword}`);
     return res;
   } catch (error) {
-    console.log(error.response.data);
+    console.log(error.response.data.errMsg);
   }
 };

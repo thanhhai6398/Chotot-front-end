@@ -1,41 +1,59 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { PostContext } from '~/contexts/PostProvider';
+import React, { useState } from 'react';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { uploadImages } from '~/apiServices/uploadImagesService';
-import Form from '~/components/Form/Form';
 import { httpEditPost } from '~/apiServices/postService';
+import ViewPost from '~/components/Post/ViewPost';
 
 const EditPost = () => {
-  const { post, setPost, handleClear } = useContext(PostContext);
-  const [isPending, setPending] = useState(false);
   const { id } = useParams();
   const currentPost = useLocation().state.post;
-  useEffect(() => {
-    setPost(currentPost);
-  }, [id]);
+  const [post, setPost] = useState(currentPost);
+  const [isPending, setPending] = useState(false);
   const navigate = useNavigate();
+  const updateImage = async () => {
+    if (!post?.newImages.length) {
+      return null;
+    }
+    return new Promise(async (resolve, reject) => {
+      const newImgURLs = await uploadImages(
+        post.category._id || post.category,
+        post.newImages
+      );
+      resolve(newImgURLs);
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (post.images.length > 0) {
-      try {
-        setPending(true);
-        const imagesURLs = await uploadImages(post.category, post.images);
-        const newPost = { ...post, images: imagesURLs };
-        setTimeout(async () => {
-          const response = null;
-          handleClear();
-          console.log(response.data);
-          setPending(false);
-          /* */
-          navigate('/managePosts');
-        }, 5000);
-      } catch (error) {
-        console.log(error.message);
+    try {
+      const newPost = { ...post };
+      if (post?.newImages) {
+        const newImgURLs = await uploadImages(
+          post.category._id || post.category,
+          post.newImages
+        );
+        console.log(newImgURLs);
+        newPost.images.push(...newImgURLs);
       }
-    } else console.log('Image is require');
+      setTimeout(async () => {
+        console.log(newPost.images);
+        const response = await httpEditPost(id, newPost);
+        console.log(response.data);
+        setPending(false);
+        /* */
+        navigate('/managePosts');
+      }, 5000);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-  return <Form handleSubmit={handleSubmit} isPending={isPending} />;
+
+  return (
+    <div>
+      {isPending && <p>Loading.....</p>}
+      <ViewPost post={post} setPost={setPost} handleSubmit={handleSubmit} />
+    </div>
+  );
 };
 
 export default EditPost;
