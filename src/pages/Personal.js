@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAuth from "~/hooks/useAuth";
+import * as request from '~/utils/request';
 import { logout } from "~/apiServices/authServices";
 import { httpGetUserById } from "~/apiServices/userService";
 import { httpGetFollowing } from "~/apiServices/postService";
@@ -9,7 +10,7 @@ import { httpGetFollowing } from "~/apiServices/postService";
 const Personal = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { setAuth, auth } = useAuth();
   const handleLogout = async () => {
     const res = await logout();
     setAuth({});
@@ -30,15 +31,62 @@ const Personal = () => {
     getUserById();
   }, []);
 
+  //Số lượng người dùng đang follow
   const [countFollowing, setCountFollowing] = useState([]);
   useEffect(() => {
     const getFollowing = async () => {
       const response = await httpGetFollowing(id);
-      console.log(response.result);
+      console.log(response.following);
       setCountFollowing(response.result);
     };
     getFollowing();
   }, []);
+
+  //Danh sách người dùng mà Tài khoản đăng nhập đã follow
+  const [listFollowing, setListFollowing] = useState([]);
+  useEffect(() => {
+    const getListFollowing = async () => {
+      const response = await httpGetFollowing(auth.user?._id);
+      console.log(response.following);
+      setListFollowing(response.following);
+    };
+    getListFollowing();
+  }, []);
+
+  const searchValue = (userId, array) => {
+    let new_array = [];
+    for (let i = 0; i < array.length; i++) {
+      if (array[i]._id === userId || array[i] === userId) {
+        new_array.push(array[i]);
+      }
+    }
+    return new_array;
+  };
+
+  const follow = async (userId, payload) => {
+    try {
+      const { newUser } = await request.patch(
+        `/users/follow/${userId}`,
+        payload
+      );
+      console.log(newUser.fowllowing);
+      setListFollowing(newUser.fowllowing);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unFollow = async (userId, payload) => {
+    try {
+      const { newUser } = await request.patch(
+        `/users/unfollow/${userId}`,
+        payload
+      );
+      setListFollowing(newUser.fowllowing);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <div className="mx-auto max-w-5xl lg:max-w-7xl lg:px-8 py-3 h-screen">
@@ -58,16 +106,24 @@ const Personal = () => {
           <div>
             <Link to={`/following/${user._id}`}>{countFollowing} đang theo dõi</Link>
           </div>
-          <button className="" onClick={() => handleEditPage(user._id)}>
-              Chỉnh sửa
-            </button>
-          {/* {user._id === localStorage.getItem("LOCAL_STORAGE_KEY")._id ? (
-            <button className="" onClick={handleEditPage(user._id)}>
-              Chỉnh sửa
-            </button>
-          ) : (
-            <button> + Theo dõi</button>
-          )} */}
+
+          <div>
+            {user?.phone === auth.user?.phone ? (
+              <button className="" onClick={handleEditPage(user?._id)}>
+                Chỉnh sửa
+              </button>
+            ) : (
+              <div>
+                {searchValue(user._id, listFollowing).length > 0 ? (
+                  <button onClick={() => unFollow(user._id)}
+                  > Hủy theo dõi </button>
+                ) : (
+                  <button onClick={() => follow(user._id)}
+                  > Theo dõi </button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
