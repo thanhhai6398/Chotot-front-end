@@ -93,9 +93,9 @@ export const httpGetPostsSaved = () => {
     console.log(error.response.data);
   }
 };
-export const httpGetFollowing = () => {
+export const httpGetFollowing = (id) => {
   try {
-    const res = request.get('/users/getFollowing');
+    const res = request.get(`/getFollowing/${id}`);
     return res;
   } catch (error) {
     console.log(error.response.data);

@@ -130,12 +130,15 @@ const Detail = ({ post }) => {
                   <h3 className='text-lg font-medium text-gray-900'>
                     {post?.postedBy?.username}
                   </h3>
-                  <button
-                    href='#'
-                    className='px-6 py-2 text-white bg-yellow-500 rounded-full hover:bg-yellow-300 hover:text-red-100'
-                  >
-                    Xem cửa hàng
-                  </button>
+                  <Link
+                    to={`/personal/${post?.postedBy?._id}`}>
+                    <button
+                      href='#'
+                      className='px-6 py-2 text-white bg-yellow-500 rounded-full hover:bg-yellow-300 hover:text-red-100'
+                    >
+                      Xem cửa hàng
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
