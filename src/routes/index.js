@@ -18,6 +18,7 @@ import BiographicalPage from '~/pages/BiographPage';
 
 //ADMIN
 import Dashboard from '~/pages/Admin/Dashboard';
+import EditUser from '~/pages/EditUser';
 
 export const publicRoute = [
   {
@@ -58,6 +59,10 @@ export const userRoute = [
   {
     path: '/personal/:id',
     component: Personal,
+  },
+  {
+    path: '/personal/edit/:id',
+    component: EditUser,
   },
   {
     path: 'managePosts',
