@@ -37,7 +37,7 @@ export const put = async (path, payload) => {
 };
 
 export const patch = async (path, payload) => {
-  const response = await request.patch(path, payload, options);
+  const response = await request.patch(path, payload);
   return response.data;
 };
 export default request;

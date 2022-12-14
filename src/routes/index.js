@@ -69,7 +69,7 @@ export const userRoute = [
     component: ManagePosts,
   },
   {
-    path: 'following',
+    path: 'following/:id',
     component: Following,
   },
   {
