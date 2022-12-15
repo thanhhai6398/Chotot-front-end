@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import { httpGetFollowing } from "~/apiServices/postService";
 import * as request from '~/utils/request';
 const following = [
@@ -12,20 +13,21 @@ const following = [
     }
 ]
 function Following() {
+    const { id } = useParams();
     const [listFollowing, setListFollowing] = useState([]);
-    const getPostsSaved = async () => {
-        const response = await httpGetFollowing();
+    const getFollowing = async () => {
+        const response = await httpGetFollowing(id);
         console.log(response.following);
         setListFollowing(response.following);
     };
     useEffect(() => {
-        getPostsSaved();
+        getFollowing();
     }, []);
 
     const unFollow = async (userId, payload) => {
         try {
             const { newUser } = await request.patch(`/users/unfollow/${userId}`, payload);
-            getPostsSaved();
+            getFollowing();
         } catch (error) {
             console.log(error);
         }

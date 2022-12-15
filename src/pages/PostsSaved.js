@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { httpGetPostsSaved } from "~/apiServices/postService";
 import * as request from '~/utils/request';
 const posts = [
@@ -92,7 +93,7 @@ function PostsSaved() {
                                             <div>
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                     <h3>
-                                                        <a href="#">{post.title}</a>
+                                                        <Link to={`/posts/${post._id}`}>{post.title}</Link>
                                                     </h3>
                                                 </div>
                                             </div>
