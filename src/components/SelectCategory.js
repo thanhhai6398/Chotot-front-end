@@ -15,7 +15,7 @@ const SelectCategory = ({ currentValue, handleChange }) => {
       name='category'
       value={currentValue || 'default'}
       onChange={handleChange}
-      className='p-2 border border-gray-400 rounded-sm mt-8 focus:border-yellow-300 focus:outline-none'
+      className='w-full p-2 border border-gray-400 rounded-sm mt-8 focus:border-yellow-300 focus:outline-none'
       required
     >
       <option value='default'>Chọn loại tin</option>
