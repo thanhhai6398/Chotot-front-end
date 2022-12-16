@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { httpGetFollowing } from "~/apiServices/postService";
 import * as request from '~/utils/request';
 const following = [
@@ -33,10 +33,19 @@ function Following() {
         }
     };
 
+    const navigate = useNavigate();
+
+    const handleGoBack = async () => {
+        navigate(`/personal/${id}`);
+      }
+
     return (
         <div className="bg-white">
+            
             <div className="mx-auto max-w-xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Đang theo dõi</h1>
+                
                 <div className="grid grid-cols-1 gap-y-10">
                     {listFollowing.length > 0 ? (
                         <div>
@@ -98,6 +107,10 @@ function Following() {
                         ))
                     } */}
                 </div>
+                <button className="rounded w-32 h-10 px-5 pt-1 text-center text-lg text-white bg-red-500 mx-5"
+                    onClick={handleGoBack}
+                >Quay lại
+                </button>
             </div>
         </div>
     )

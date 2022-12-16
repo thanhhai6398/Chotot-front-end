@@ -19,6 +19,10 @@ const Personal = () => {
         navigate("/");
     };
 
+    const handleGoBack = async () => {
+      navigate(`/`);
+    }
+
     const handleEditPage = async (id) => {
         navigate(`/personal/edit/${id}`);
     };
@@ -92,51 +96,59 @@ const Personal = () => {
     return (
         <div>
             <div className="mx-auto max-w-5xl lg:max-w-7xl lg:px-8 py-3 h-screen">
-                <button
+                
+              <div>
+                  <Link to="/" className="text-xl mt-9 py-12">
+                      Chợ tốt - Trang cá nhân {user.username}
+                  </Link>
+
+                  <div className="border-b-2 border-slate-200 mb-12"></div>
+                  <div className="text-2xl font-bold hover:text-orange-400 m-5">{user.username}</div>
+                  <div className="text-2xl m-5"><label className="font-bold">Số điện thoại:</label> {user.phone}</div>
+                  <div className="text-2xl m-5"><label className="font-bold">Địa chỉ liên hệ: </label> {user.address}</div>
+                  <div>
+                      <Link to={`/following/${user._id}`} className='bg-orange-400 hover:bg-yellow-400 text-2xl rounded-2xl p-2 m-5'>
+                          Đang có {countFollowing} đang theo dõi
+                      </Link>
+                  </div>
+
+                  <div>
+                      {user?.phone === auth.user?.phone ? (
+                          <button
+                              className="bg-orange-300 hover:bg-yellow-400 text-xl p-5 rounded-3xl m-5"
+                              onClick={() => handleEditPage(user?._id)}
+                          >
+                              Chỉnh sửa
+                          </button>
+                      ) : (
+                          <div>
+                              {searchValue(user._id, listFollowing).length >
+                              0 ? (
+                                  <button className="bg-orange-300 hover:bg-red-400 text-xl p-5 rounded-3xl m-5" onClick={() => unFollow(user._id)}>
+                                      {" "}
+                                      Hủy theo dõi{" "}
+                                  </button>
+                              ) : (
+                                  <button className="bg-orange-300 hover:bg-orange-500 text-xl p-5 rounded-3xl m-5" onClick={() => follow(user._id)}>
+                                      {" "}
+                                      Theo dõi{" "}
+                                  </button>
+                              )}
+                          </div>
+                      )}
+                  </div>
+              </div>
+              <button
                     className="rounded w-32 h-10 px-5 pt-1 text-center text-lg text-white bg-red-500"
                     onClick={handleLogout}
                 >
                     Đăng xuất
                 </button>
-                <div>
-                    <Link to="/" className="text-xs mt-6">
-                        Chợ tốt - Trang cá nhân {user.username}
-                    </Link>
-
-                    <div className="border-b-2 border-slate-200 mb-12"></div>
-                    <div>{user.username}</div>
-                    <div>
-                        <Link to={`/following/${user._id}`}>
-                            {countFollowing} đang theo dõi
-                        </Link>
-                    </div>
-
-                    <div>
-                        {user?.phone === auth.user?.phone ? (
-                            <button
-                                className=""
-                                onClick={() => handleEditPage(user?._id)}
-                            >
-                                Chỉnh sửa
-                            </button>
-                        ) : (
-                            <div>
-                                {searchValue(user._id, listFollowing).length >
-                                0 ? (
-                                    <button onClick={() => unFollow(user._id)}>
-                                        {" "}
-                                        Hủy theo dõi{" "}
-                                    </button>
-                                ) : (
-                                    <button onClick={() => follow(user._id)}>
-                                        {" "}
-                                        Theo dõi{" "}
-                                    </button>
-                                )}
-                            </div>
-                        )}
-                    </div>
-                </div>
+                <button className="rounded w-32 h-10 px-5 pt-1 text-center text-lg text-white bg-red-500 mx-5"
+                    onClick={handleGoBack}
+                >
+                    Quay lại 
+                </button>
             </div>
         </div>
     );

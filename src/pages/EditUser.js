@@ -17,6 +17,11 @@ const EditUser =() =>{
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
       };
+
+      const handleGoBack = async () => {
+        navigate(`/personal/${id}`);
+      }
+      
     useEffect(() => {
         const getUserById = async () => {
             const response = await httpGetUserById(id);
@@ -46,7 +51,7 @@ const EditUser =() =>{
 		
     };
     return (
-        <div>
+        <div className="mx-auto max-w-5xl lg:max-w-7xl lg:px-8 py-3 h-screen">
             <Link to="/" className="text-xs mt-6">
                 Chợ tốt - Trang cá nhân {user.username}
             </Link>
@@ -95,6 +100,12 @@ const EditUser =() =>{
                     className=" bg-amber-500 hover:bg-amber-400 rounded h-10 w-72 mt-6">
                         Lưu
                     </button>
+                </div>
+                <div>
+                <button className="bg-amber-500 hover:bg-red-500 rounded h-10 w-72 mt-6"
+                    onClick={handleGoBack}
+                >Quay lại
+                </button>
                 </div>
             </div>
         </div>
