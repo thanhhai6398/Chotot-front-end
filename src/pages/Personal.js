@@ -109,7 +109,7 @@ const Personal = () => {
 
           <div>
             {user?.phone === auth.user?.phone ? (
-              <button className="" onClick={handleEditPage(user?._id)}>
+              <button className="" onClick={() => handleEditPage(user?._id)}>
                 Chỉnh sửa
               </button>
             ) : (
