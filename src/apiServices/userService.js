@@ -9,15 +9,18 @@ export const httpGetUserById = (id) => {
     }
 };
 
-export const httpPutUserById = (id,username,phone,address,password) => {
-    const data ={username,phone,address,password};
+export const httpPutUserById = (id,username,phone,address) => {
+    const data ={username,phone,address};
     try {
-        return axios
-        .put(`http://localhost:5000/users/${id}`, data)
-        .then((response) => {
-            return response.data;
-        });
+        // return axios
+        // .put(`http://localhost:5000/users/${id}`, data)
+        // .then((response) => {
+        //     return response.data;
+        // });
+        console.log('CALL API');
+        const res = request.put(`/users/${id}`, data);
+        return res;
     } catch (error) {
-        console.log(error.response.data);
+        console.log(error.response.data.errMsg);
     }
 };
