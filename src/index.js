@@ -6,6 +6,7 @@ import './index.css';
 import App from '~/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const NODE_ENV = process.env.NODE_ENV;
 root.render(
   <React.StrictMode>
     <Router>

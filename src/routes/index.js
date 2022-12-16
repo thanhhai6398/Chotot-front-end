@@ -3,6 +3,7 @@ import PostDetail from '~/pages/PostDetail';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 import SearchResult from '~/pages/SearchResult';
+import SearchByImage from '~/pages/SearchByImage';
 
 //LAYOUT
 import BlankLayout from '~/layouts/User/BlankLayout';
@@ -43,7 +44,11 @@ export const publicRoute = [
   {
     path: 'search',
     component: SearchResult,
-  }
+  },
+  {
+    path: '/search/image',
+    component: SearchByImage,
+  },
 ];
 
 export const userRoute = [
@@ -55,7 +60,7 @@ export const userRoute = [
     path: 'edit/:id',
     component: EditPost,
   },
-  
+
   {
     path: '/personal/:id',
     component: Personal,

@@ -9,14 +9,12 @@ export const httpGetUserById = (id) => {
     }
 };
 
-export const httpPutUserById = (id,username,phone,address,password) => {
+export const httpPutUserById = async (id,username,phone,address,password) => {
     const data ={username,phone,address,password};
     try {
-        return axios
-        .put(`http://localhost:5000/users/${id}`, data)
-        .then((response) => {
-            return response.data;
-        });
+        const response = await axios
+            .put(`http://localhost:5000/users/${id}`, data);
+        return response.data;
     } catch (error) {
         console.log(error.response.data);
     }
